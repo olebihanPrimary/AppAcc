@@ -6,7 +6,9 @@ import { BrowserRouter } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar";
 import { Light, Dark } from "./styles/Themes";
 import { ThemeProvider } from "styled-components";
+import { AuthProvider } from "./context/AuthProvider";
 export const ThemeContext = React.createContext(null);
+
 function App() {
   const [theme, setTheme] = useState("light");
   const themeStyle = theme === "light" ? Light : Dark;
@@ -16,6 +18,8 @@ function App() {
     <>
       <ThemeContext.Provider value={{ setTheme, theme }}>
         <ThemeProvider theme={themeStyle}>
+
+         <AuthProvider> 
           <BrowserRouter>
             <Container className={sidebarOpen ? "sidebarState active" : ""}>
               <Sidebar
@@ -25,6 +29,8 @@ function App() {
               <MyRoutes />
             </Container>
           </BrowserRouter>
+         </AuthProvider> 
+          
         </ThemeProvider>
       </ThemeContext.Provider>
     </>

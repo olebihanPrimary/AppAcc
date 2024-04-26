@@ -7,7 +7,7 @@ import {
   AiOutlineApartment,
   AiOutlineSetting,
 } from "react-icons/ai";
-import { MdOutlineAnalytics, MdLogout } from "react-icons/md";
+import { MdOutlineAnalytics, MdLogout, MdAccessibility,MdConstruction } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { ThemeContext } from "../App";
@@ -87,12 +87,12 @@ const linksArray = [
   },
   {
     label: "Mantenimiento Tablas",
-    icon: <MdOutlineAnalytics />,
+    icon: <MdConstruction />,
     to: "/mantenimientotablaspage",
   },
   {
     label: "Comitentes",
-    icon: <AiOutlineSetting />,
+    icon: <MdAccessibility />,
     to: "/comitenteslista",
   },
   {

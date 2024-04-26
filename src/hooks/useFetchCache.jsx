@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 const localCache = {};
 
 
-export const useFetch = ( url ) => {
+export const useFetchCache = ( url ) => {
   
   const [state, setState] = useState({
     data: null ,
@@ -64,6 +64,7 @@ export const useFetch = ( url ) => {
     }
   
     const data = await resp.json();
+    
     setState({
       data: data,
       isLoading: false,

@@ -10,8 +10,11 @@ import { SearchPage } from "../components/SearchPage";
 import { ComitentesForm } from "../components/ComitentesForm";
 import { ComitentesLista } from "../components/ComitentesLista";
 import { SearchPageComitentes } from "../components/SearchPageComitentes";
+import { SearchPageAccionistas } from "../components/SearchPageAccionistas";
 
 export function MyRoutes() {
+
+  
   
   return (
    
@@ -27,6 +30,7 @@ export function MyRoutes() {
         <Route path="/accionistasform" element={<AccionistasForm />} />
         <Route path="/searchpage" element={<SearchPage />} />
         <Route path="/searchpagecomitentes" element={<SearchPageComitentes />} />
+        <Route path="/searchpageaccionistas" element={<SearchPageAccionistas />} />
         <Route path="/comitenteslista" element={<ComitentesLista />} />
         <Route path="/comitentesform" element={<ComitentesForm />} />
         <Route path="/searchpage" element={<SearchPage />} />        

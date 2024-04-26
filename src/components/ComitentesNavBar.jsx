@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-
+import styled from "styled-components";
 
 export const ComitentesNavBar = () => {
 
@@ -12,6 +12,7 @@ export const ComitentesNavBar = () => {
     }
 
     return (
+        
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-2">
             
             <div className="navbar-collapse">
@@ -59,3 +60,10 @@ export const ComitentesNavBar = () => {
         </nav>
     )
 }
+
+const Container =styled.div`
+   height:100vh;
+   margin:20px;
+   font-size: 16px;
+`
+

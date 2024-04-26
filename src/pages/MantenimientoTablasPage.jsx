@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const MantenimientoTablasPage = () => {
   return (
     <>
-    <h1>MantenimientoTablasPage</h1>
+    <h1 className="m-3">Mantenimiento Tablas</h1>
     </>
   )
 }

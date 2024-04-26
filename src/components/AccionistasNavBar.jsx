@@ -33,7 +33,7 @@ export const AccionistasNavBar = () => {
                     
                     <NavLink 
                         className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
-                        to="/searchpage"
+                        to="/searchpageaccionistas"
                     >
                         Search
                     </NavLink>
