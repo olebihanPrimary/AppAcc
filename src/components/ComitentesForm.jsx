@@ -65,7 +65,7 @@ export const ComitentesForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
       
-        const url = 'https://localhost:32768/api/Comitentes';
+        const url = 'https://localhost:32770/api/Comitentes';
       
           fetch(url, {
           method: 'POST',

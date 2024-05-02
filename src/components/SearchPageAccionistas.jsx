@@ -69,7 +69,7 @@ const q = '';
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch(`https://localhost:32768/api/Accionistas/${searchText}`)
+    fetch(`https://localhost:32770/api/Accionistas/${searchText}`)
       .then(response => response.json())
       .then(data => {
         if (data === null) {

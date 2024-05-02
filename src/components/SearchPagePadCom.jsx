@@ -2,14 +2,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string' 
 import styled from "styled-components";
 import { getHeroesByName } from '../helpers'; 
-import { ComitentesNavBar } from './ComitentesNavBar';
+import { PadComNavBar } from './PadComNavBar';
 import { useForm } from '../hooks/useForm';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { FormularioComitente } from './FormularioComitente';
+import { FormularioPadCom } from './FormularioPadCom';
 
 
-export const SearchPageComitentes = () => {
+export const SearchPagePadCom = () => {
 
   
   const navigate = useNavigate();
@@ -69,7 +69,7 @@ const q = '';
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch(`https://localhost:32770/api/Comitentes/${searchText}`)
+    fetch(`https://localhost:32770/api/Accionistas/${searchText}`)
       .then(response => response.json())
       .then(data => {
         if (data === null) {
@@ -108,7 +108,7 @@ const q = '';
 
   return (
     <Container>
-      <ComitentesNavBar />
+      <PadComNavBar />
 
       {/* <h1>Search</h1>  */}
       <hr />
@@ -116,7 +116,7 @@ const q = '';
       <div className="row">
 
           <div className="col-5">
-            <h4>Buscar Comitente</h4>
+            <h4>Buscar Registro PadCom</h4>
             <hr />
             <form onSubmit={ handleSubmit } className='d-flex'>
               <input 
@@ -156,7 +156,7 @@ const q = '';
 
             <div className="alert alert-danger animate__animated animate__fadeIn" 
                 style={{ display: showError ? '' : 'none' }}>
-              No existe <b> Comitente consultado </b>
+              No existe <b> Accionista consultado </b>
             </div>
 
 
@@ -195,7 +195,7 @@ const q = '';
               </div> */}
               <div className="col" 
                 style={{ display: showSearch ? '' : 'none' }}>
-              { <FormularioComitente respuesta = {data}/> } 
+              { <FormularioPadCom respuesta = {data}/> } 
               </div>
              </Container>
               

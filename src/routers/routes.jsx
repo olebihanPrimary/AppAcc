@@ -11,6 +11,9 @@ import { ComitentesForm } from "../components/ComitentesForm";
 import { ComitentesLista } from "../components/ComitentesLista";
 import { SearchPageComitentes } from "../components/SearchPageComitentes";
 import { SearchPageAccionistas } from "../components/SearchPageAccionistas";
+import { PadComForm } from "../components/PadComForm";
+import { PadComLista } from "../components/PadComLista";
+import { SearchPagePadCom } from "../components/SearchPagePadCom";
 
 export function MyRoutes() {
 
@@ -33,6 +36,9 @@ export function MyRoutes() {
         <Route path="/searchpageaccionistas" element={<SearchPageAccionistas />} />
         <Route path="/comitenteslista" element={<ComitentesLista />} />
         <Route path="/comitentesform" element={<ComitentesForm />} />
+        <Route path="/searchpagepadcom" element={<SearchPagePadCom />} />
+        <Route path="/padcomlista" element={<PadComLista />} />
+        <Route path="/padcomform" element={<PadComForm />} />        
         <Route path="/searchpage" element={<SearchPage />} />        
         
       </Routes>

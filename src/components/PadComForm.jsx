@@ -1,17 +1,20 @@
 import styled from "styled-components";
 import { useEffect, useState } from 'react';
 import { Message } from "./Messaje";
-import { AccionistasNavBar } from "./AccionistasNavBar";
+import { PadComNavBar } from "./PadComNavBar";
+import { Form, json } from "react-router-dom";
+import { FormularioComitente } from "./FormularioComitente";
 
 
-export const AccionistasForm = () => {
-
+export const PadComForm = () => {
+    
     const formInicial = {
-        codigoAccionista: '',
-        tipoRegistroDatoID: 1,
+        codigoComitente: '',
+        codigoDepositante:'',
+        tipoComitenteID: 1,
+        numeroCondominio: '',
         lugarRegPubComercio: '', 
         numeroImpuestoGanancias: '', 
-        tipoCuentaID: 1,
         UsuarioModifica: 'OLB', 
         tipoPersonaID: 1,
         tipoDocumentoID: 1,
@@ -29,26 +32,26 @@ export const AccionistasForm = () => {
         otros: '',
         localidadID: 1
     };
+
     const [formState, setFormState] = useState(formInicial);
-
-    const [status , setStatus] = useState(null);
-
-    const [response, setResponse] = useState(null); 
 
     const limpiarFormulario = () => {
 
         setFormState(formInicial);
 
-    }    
+    }
 
-    const { codigoAccionista, 
-        lugarRegPubComercio, numeroImpuestoGanancias, tipoCuentaID,
-        UsuarioModifica, tipoPersonaID, tipoDocumentoID, numeroDocumento, 
-        nombre,apellidos, nacionalidadID, telefonoContacto ,email ,
-        tipoDomicilioID, calle, numero, piso, departamento, otros, localidadID} = formState;
+    const [status , setStatus] = useState(null);
+
+    const [response, setResponse] = useState(null); 
 
 
-        
+    const { codigoComitente, codigoDepositante, tipoComitenteID, numeroCondominio,
+            lugarRegPubComercio, numeroImpuestoGanancias, UsuarioModifica, 
+            tipoPersonaID, tipoDocumentoID, numeroDocumento, 
+            nombre,apellidos, nacionalidadID, telefonoContacto ,email ,
+            tipoDomicilioID, calle, numero, piso, departamento, otros, localidadID} = formState;
+
     const onInputChange = ({ target }) => {
         const { name, value } = target;
 /*         console.log(name);
@@ -62,7 +65,7 @@ export const AccionistasForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
       
-        const url = 'https://localhost:32770/api/Accionistas';
+        const url = 'https://localhost:32770/api/Comitentes';
       
           fetch(url, {
           method: 'POST',
@@ -85,70 +88,96 @@ export const AccionistasForm = () => {
       };
 
 
- 
+   /*  useEffect( () => {
+        // console.log('useEffect called!');
+    }, []); */
+    
+ /*    useEffect( () => {
+        console.log('formState changed!');
+    }, [formState]);
+
+    useEffect( () => {
+        // console.log('email changed!');
+    }, [ email ]); */
+
+
     return (
         <Container>
           
-        <AccionistasNavBar/>
-                <>
-            <h3 className="mt-3">Formulario Accionistas</h3> 
+        <PadComNavBar/>
+        <>
+
+       
+            <h3 className="mt-3">Formulario PadCom</h3> 
             <hr />
+            
             <form onSubmit={handleSubmit}>
             <div className="row">
-                <label className="col-sm-2 col-form-label col-form-label-sm">Cód. Accionista:</label>
+                <label className="col-sm-2 col-form-label col-form-label-sm">Cód. Comitente:</label>
                 <div className="col-sm-3">
                 <input 
                     type="text" 
                     className="form-control form-control-sm"
-                    placeholder="Codigo Accionista"
-                    name="codigoAccionista"
-                    value={ codigoAccionista }
+                    placeholder="Codigo Comitente"
+                    name="codigoComitente"
+                    value={ codigoComitente }
                     onChange={ onInputChange }
                 />
                 </div>
             </div>
 
-            <div className="row align-items-center">
-
-                <label className="col-sm-2 col-form-label col-form-label-sm">Tipo registro:</label>
+            <div className="row align-items-center"> 
+  
+                <label className="col-sm-2 col-form-label col-form-label-sm">Tipo Comitente</label>
                 <div className="col-sm-3">
-
-                    <select className="form-select form-select-sm mt-2" name="tipoRegistroDatoID" id="exampleSelect"
-                        onChange={ onInputChange } defaultValue={"DEFAULT"}
-                    >
-                        <option value="DEFAULT" disabled>Seleccionar</option>
-                        <option value={ '1' }>Titular</option>
-                        <option value={ '2' }>Condominio</option>
-
-                    </select>                    
-
                     {/* <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
-                        placeholder="Tipo Documento"
-                        name="tipoDocumento"
-                        value={ tipoDocumento }
+                        placeholder="Tipo de comitente"
+                        name="tipoComitenteID"
+                        value={ tipoComitenteID }
                         onChange={ onInputChange }
                     /> */}
-                </div>
-                <label className="col-sm-2 col-form-label col-form-label-sm">Tipo de cuenta:</label>
-                <div className="col-sm-3">                          
-                <select className="form-select form-select-sm mt-2" name="tipoCuentaID" id="exampleSelect"
+                    <select className="form-select form-select-sm mt-2" name="tipoComitenteID" id="TipoComitenteIDSelect"
                         onChange={ onInputChange } defaultValue={"DEFAULT"}
                     >
-                        <option value="DEFAULT" disabled>Seleccionar</option>
-                        <option value={ '3' }>Normal</option>
-                        <option value={ '4' }>Conjunta</option>
-                        <option value={ '5'}>Condominio</option>
+                        <option value="DEFAULT" disabled>Seleccione Opción</option>
+                        <option value={ '1' }>Normal</option>
+                        <option value={ '2' }>Cuenta Conjunta</option>
+                        
 
-                    </select>     
+                    </select>      
                 </div>
 
+            
+                <label className="col-sm-2 col-form-label col-form-label-sm">Cód. Depositante:</label>
+                <div className="col-sm-3">
+                    <input 
+                        type="text" 
+                        className="form-control form-control-sm mt-2"
+                        placeholder="Codigo Depositante"
+                        name="codigoDepositante"
+                        value={ codigoDepositante }
+                        onChange={ onInputChange }
+                    />
+                </div>
 
-            </div>  
+            </div>
 
-                        
+            
             <div className="row align-items-center"> 
+                <label className="col-sm-2 col-form-label col-form-label-sm">Número de Condominio:</label>
+                <div className="col-sm-3">
+                    <input 
+                        type="text" 
+                        className="form-control form-control-sm mt-2"
+                        placeholder="Numero de Condominio"
+                        name="numeroCondominio"
+                        value={ numeroCondominio }
+                        onChange={ onInputChange }
+                    />
+                </div>
+
                 <label className="col-sm-2 col-form-label col-form-label-sm">Lugar Registro Público:</label>
                 <div className="col-sm-3">
                     <input 
@@ -162,7 +191,9 @@ export const AccionistasForm = () => {
                 </div>
 
 
-
+            </div>    
+ 
+            <div className="row align-items-center"> 
                 <label className="col-sm-2 col-form-label col-form-label-sm">Número Impuesto Ganancias:</label>
                 <div className="col-sm-3">
                     <input 
@@ -386,7 +417,7 @@ export const AccionistasForm = () => {
             { response && 
                 <div className="row">
                     <div className="alert alert-success" role="alert">
-                         Accionista: {response.codigoAccionista} {response.apellidos} {response.nombre} ingresado con éxito.
+                         Comitente: {response.codigoComitente} {response.apellidos} {response.nombre} ingresado con éxito.
                        {/* <small> { JSON.stringify(response, null,2)  }</small>   */}
 
                     </div>
@@ -394,12 +425,17 @@ export const AccionistasForm = () => {
                 </div>}     
 
             </form>
+          
         </>
         </Container>
     )
 }
 
+{/*             {
+                (username === 'strider2' ) && <Message />
+            } */}
+
 const Container =styled.div`
-   height:150vh;
+   height:250vh;
    margin:20px;
 `
