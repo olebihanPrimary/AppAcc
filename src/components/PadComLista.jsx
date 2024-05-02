@@ -14,7 +14,7 @@ export const PadComLista = () => {
     /* const {data, isLoading} = useFetch ( 'https://localhost:32768/api/Comitentes/consultapersonas' ); */
     
      useEffect(() => {
-        fetch('https://localhost:32770/api/Comitentes/consultapersonas')
+        fetch('https://localhost:32768/api/Comitentes/consultapersonas')
           .then(response => response.json())
           .then(data => setData(data))
           .catch(error => console.error(error));

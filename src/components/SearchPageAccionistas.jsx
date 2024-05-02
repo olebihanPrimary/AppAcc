@@ -7,6 +7,8 @@ import { useForm } from '../hooks/useForm';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { FormularioAccionista } from './FormularioAccionista';
+import { VarContext } from "../App";
+import { useContext } from "react";
 
 
 export const SearchPageAccionistas = () => {
@@ -65,11 +67,13 @@ const q = '';
     setInputValue(event.target.value);
   };
   
+  const url = useContext(VarContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch(`https://localhost:32770/api/Accionistas/${searchText}`)
+
+    fetch(`https://${url}/api/Accionistas/${searchText}`)
       .then(response => response.json())
       .then(data => {
         if (data === null) {
@@ -85,25 +89,7 @@ const q = '';
       });
     }
  
-    const onSearchSubmit = async (event) =>{
-
-      event.preventDefault();
-      // if ( searchText.trim().length <= 1 ) return;
-      const response = await fetch(`https://localhost:32768/api/Comitentes/${searchText}`);
-      const data = await response.json() ;
-
-            if (data === null) {
-              console.error('Los datos recibidos son nulos');
-            } else {
-              setData(data);
-            }
-      
-      setMostrar(data);
-      setData(data);
-
-      console.log(JSON.stringify(mostrar));
-  
-    }
+   
 
 
   return (
@@ -151,7 +137,7 @@ const q = '';
             
             <div className="alert alert-success animate__animated animate__fadeIn" 
                 style={{ display: showSearch ? '' : 'none' }}>
-              Comitente Consultado.
+              Accionista Consultado.
             </div>
 
             <div className="alert alert-danger animate__animated animate__fadeIn" 
@@ -166,51 +152,13 @@ const q = '';
              <Container className='container-lista'>
              
              
-             {/* <div className="row">
-
-               <div className="col-4">
-                <p>{data.codigoDepositante}</p>
-              </div>
-              <div className="col-4">
-                <p>{}</p>
-              </div>
-              <div className="col-4">
-                <p>{data.comitenteID}</p>
-              </div> 
-
-              <div className="row">
-                <label className="col-sm-2 col-form-label col-form-label-sm">Cód. Comitente:</label>
-                <div className="col-sm-3">
-                <input 
-                    type="text" 
-                    className="form-control"
-                    placeholder="Codigo Comitente"
-                    name="codigoComitente"
-                    value={ data.codigoComitente }
-                />
-                </div>
-              </div>
-              
-             
-              </div> */}
+            
               <div className="col" 
                 style={{ display: showSearch ? '' : 'none' }}>
               { <FormularioAccionista respuesta = {data}/> } 
               </div>
              </Container>
-              
-         {/*     {  
-                data.map((item, index) => (
-                <div key={index} className="row text-sm">
-
-                  <div className="col-1 text-end"> {item.codigoComitente} </div>
-                  <div className="col-1 text-end"> {item.codigoDepositante} </div>
-
-                </div>))
-              } */}
-                
-              
-
+        
              
           </div>
       </div>

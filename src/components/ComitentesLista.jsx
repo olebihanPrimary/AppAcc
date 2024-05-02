@@ -5,6 +5,10 @@ import { ComitentesNavBar } from "./ComitentesNavBar";
 import { useFetch } from "../hooks/useFetch";
 import { LoadingMessage } from "./LoadingMessage";
 import { ComitenteCard } from "./ComitenteCard";
+import { VarContext } from "../App";
+import { useContext } from "react";
+
+
 
 
 export const ComitentesLista = () => {
@@ -13,8 +17,10 @@ export const ComitentesLista = () => {
     
     /* const {data, isLoading} = useFetch ( 'https://localhost:32768/api/Comitentes/consultapersonas' ); */
     
+    const url = useContext(VarContext);
+    
      useEffect(() => {
-        fetch('https://localhost:32770/api/Comitentes/consultapersonas')
+        fetch(`https://${url}/api/Comitentes/consultapersonas`)
           .then(response => response.json())
           .then(data => setData(data))
           .catch(error => console.error(error));

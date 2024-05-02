@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useEffect, useState } from 'react';
 import { Message } from "./Messaje";
 import { AccionistasNavBar } from "./AccionistasNavBar";
+import { VarContext } from "../App";
+import { useContext } from "react";
 
 
 export const AccionistasLista = () => {
@@ -33,12 +35,16 @@ export const AccionistasLista = () => {
     useEffect( () => {
         // console.log('email changed!');
     }, [ email ]); */
-    const [data, setData] = useState([]);  
+    const [data, setData] = useState([]);
+
+    
+    
+    const url = useContext(VarContext);
     
     /* const {data, isLoading} = useFetch ( 'https://localhost:32768/api/Comitentes/consultapersonas' ); */
     
      useEffect(() => {
-        fetch('https://localhost:32770/api/Accionistas/consultapersonas')
+        fetch(`https://${url}/api/Accionistas/consultapersonas`)
           .then(response => response.json())
           .then(data => setData(data))
           .catch(error => console.error(error));

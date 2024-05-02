@@ -1,4 +1,5 @@
 export const v={
+    port:`32768`,
     sidebarWidth: `300px`,
     sidebarWidthInitial: `10vw`,
     smSpacing: `6px`,

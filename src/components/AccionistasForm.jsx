@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useEffect, useState } from 'react';
 import { Message } from "./Messaje";
 import { AccionistasNavBar } from "./AccionistasNavBar";
+import { VarContext } from "../App";
+import { useContext } from "react";
 
 
 export const AccionistasForm = () => {
@@ -61,8 +63,10 @@ export const AccionistasForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        const varUrl = useContext(VarContext);
       
-        const url = 'https://localhost:32770/api/Accionistas';
+        const url = `https://${varUrl}/api/Accionistas`;
       
           fetch(url, {
           method: 'POST',

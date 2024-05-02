@@ -7,6 +7,8 @@ import { useForm } from '../hooks/useForm';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { FormularioComitente } from './FormularioComitente';
+import { useContext } from 'react';
+import { VarContext } from '../App';
 
 
 export const SearchPageComitentes = () => {
@@ -14,9 +16,6 @@ export const SearchPageComitentes = () => {
   
   const navigate = useNavigate();
   const location = useLocation();
-
- /* console.log(data) */
-
 
 
 
@@ -65,11 +64,13 @@ const q = '';
     setInputValue(event.target.value);
   };
   
+  const url = useContext(VarContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch(`https://localhost:32770/api/Comitentes/${searchText}`)
+  
+    await fetch(`https://${url}/api/Comitentes/${searchText}`)
       .then(response => response.json())
       .then(data => {
         if (data === null) {
@@ -85,27 +86,7 @@ const q = '';
       });
     }
  
-    const onSearchSubmit = async (event) =>{
-
-      event.preventDefault();
-      // if ( searchText.trim().length <= 1 ) return;
-      const response = await fetch(`https://localhost:32768/api/Comitentes/${searchText}`);
-      const data = await response.json() ;
-
-            if (data === null) {
-              console.error('Los datos recibidos son nulos');
-            } else {
-              setData(data);
-            }
-      
-      setMostrar(data);
-      setData(data);
-
-      console.log(JSON.stringify(mostrar));
-  
-    }
-
-
+    
   return (
     <Container>
       <ComitentesNavBar />

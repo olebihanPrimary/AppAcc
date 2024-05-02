@@ -4,6 +4,8 @@ import { Message } from "./Messaje";
 import { ComitentesNavBar } from "./ComitentesNavBar";
 import { Form, json } from "react-router-dom";
 import { FormularioComitente } from "./FormularioComitente";
+import { VarContext } from "../App";
+import { useContext } from "react";
 
 
 export const ComitentesForm = () => {
@@ -65,7 +67,9 @@ export const ComitentesForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
       
-        const url = 'https://localhost:32770/api/Comitentes';
+        const varUrl = useContext(VarContext);
+      
+        const url = `https://${varUrl}/api/Comitentes`;
       
           fetch(url, {
           method: 'POST',
