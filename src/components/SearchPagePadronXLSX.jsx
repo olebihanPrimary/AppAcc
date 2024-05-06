@@ -6,11 +6,12 @@ import { PadComNavBar } from './PadComNavBar';
 import { useForm } from '../hooks/useForm';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { FormularioPadCom } from './FormularioPadCom';
+import { FormularioPadronXLSX } from './FormularioPadronXLSX';
 import { VarContext } from "../App";
 import { useContext } from "react";
+import { PadronXLSXNavBar } from './PadronXLSXNavBar';
 
-export const SearchPagePadCom = () => {
+export const SearchPagePadronXLSX = () => {
 
   
   const navigate = useNavigate();
@@ -28,28 +29,24 @@ const q = '';
   }); 
 
   const formInicial = {
-    codigoComitente: null,
-    codigoDepositante:'',
-    tipoComitenteID: 1,
-    numeroCondominio: '',
-    lugarRegPubComercio: '', 
-    numeroImpuestoGanancias: '', 
-    UsuarioModifica: 'OLB', 
-    tipoPersonaID: 1,
-    tipoDocumentoID: 1,
-    numeroDocumento: '',        
-    nombre:'',
-    apellidos:'',
-    nacionalidadID: 1,
-    telefonoContacto: '',
-    email: '',
-    tipoDomicilioID: 1,
-    calle: '',
-    numero: '',
-    piso: '',
-    departamento: '',
-    otros: '',
-    localidadID: 1
+    NumeroAccionista: null,
+    NumeroDepositanteCVSA: null,
+    ALYCLegajo: null,
+    CUITLegajo: null,
+    NombreLegajo: null,
+    TipoPersonaLegajo: null,
+    CategoriaLegajo: null,
+    CategoriaReporteESG: null,
+    NacionalidadLegajo: null,
+    GrupoLegajo: null,
+    Mail1Legajo: null,
+    PersonaContactoAsamblea: null,
+    Mail2Legajo: null,
+    Mail3Legajo: null,
+    TelefonoLegajo: null,
+    LocalidadLegajo: null,
+    ProvinciaLegajo: null,
+    PaisLegajo: null
 };
 
   const [data, setData] = useState(formInicial);
@@ -72,7 +69,7 @@ const q = '';
     event.preventDefault();
 
 
-    await fetch(`https://${url}/api/PadCom/${searchText}`)
+    await fetch(`https://${url}/api/PadronXLSX/${searchText}`)
       .then(response => response.json())
       .then(data => {
         if (data === null) {
@@ -93,7 +90,8 @@ const q = '';
 
   return (
     <Container>
-      <PadComNavBar />
+      <PadronXLSXNavBar />
+      
 
       {/* <h1>Search</h1>  */}
       <hr />
@@ -101,7 +99,7 @@ const q = '';
       <div className="row">
 
           <div className="col-5">
-            <h4>Buscar Registro PadCom</h4>
+            <h4>Buscar Registro Padrón XLSX</h4>
             <hr />
             <form onSubmit={ handleSubmit } className='d-flex'>
               <input 
@@ -136,12 +134,12 @@ const q = '';
             
             <div className="alert alert-success animate__animated animate__fadeIn" 
                 style={{ display: showSearch ? '' : 'none' }}>
-              Padrón Consultado.
+              Padrón XLSX Consultado.
             </div>
 
             <div className="alert alert-danger animate__animated animate__fadeIn" 
                 style={{ display: showError ? '' : 'none' }}>
-              No existe <b> Padrón consultado </b>
+              No existe <b> Padrón XLSX consultado </b>
             </div>
 
 
@@ -180,7 +178,7 @@ const q = '';
               </div> */}
               <div className="col" 
                 style={{ display: showSearch ? '' : 'none' }}>
-              { <FormularioPadCom respuesta = {data}/> } 
+              { <FormularioPadronXLSX respuesta = {data}/> } 
               </div>
              </Container>
               

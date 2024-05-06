@@ -1,31 +1,31 @@
 import React from 'react'
 
-export const FormularioPadCom = ({respuesta}) => {
+export const FormularioPadronXLSX = ({respuesta}) => {
     console.log('previo al undefine')
     console.log(JSON.stringify(respuesta))
 
-    const { tipO_REGISTRO,depositante,comitente,tipO_LINEA,conteO_CONDOMINIOS,
-    coD_ESPECIE,bloqueO_ESPECIE,tenenciA_ESPECIE,tenencia,
-    inV_TIPO,nombrE_CUENTA,denominacion,datO_REGISTRAL,
-    nrO_REGISTRAL,lugaR_REGISTRO,cuit,tipO_DOMICILIO,
-    domicilio,provincia,pais,c_POS,coD_EMISIOR} = JSON.stringify(respuesta); 
+    const {  NumeroAccionista, NumeroDepositanteCVSA, ALYCLegajo, CUITLegajo,
+    NombreLegajo, TipoPersonaLegajo,CategoriaLegajo, CategoriaReporteESG,
+    NacionalidadLegajo,GrupoLegajo, Mail1Legajo,PersonaContactoAsamblea,
+    Mail2Legajo ,Mail3Legajo,TelefonoLegajo, LocalidadLegajo, ProvinciaLegajo,
+     PaisLegajos} = JSON.stringify(respuesta); 
         /* const {respuesta} = respuesta; */
 
-        console.log("REspuesta "+cuit);
+        console.log("REspuesta "+CUITLegajo);
     
   return (
     
     <div>
 
             <div className="row">
-                <label className="col-sm-2 col-form-label col-form-label-sm">Cód. Comitente:</label>
+                <label className="col-sm-2 col-form-label col-form-label-sm">Número Accionista:</label>
                 <div className="col-sm-3">
                 <input readOnly
                     type="text" 
                     className="form-control form-control-sm"
-                    placeholder="Codigo Comitente"
-                    name="comitente"
-                    value={ respuesta.comitente === null ? "Código": respuesta.comitente }
+                    placeholder="Número Comitente"
+                    name="numeroAccionista"
+                    value={ respuesta.NumeroAccionista === null ? "Número": respuesta.NumeroAccionista }
                 />
                 </div>
             </div>

@@ -4,33 +4,30 @@ import { Message } from "./Messaje";
 import { PadComNavBar } from "./PadComNavBar";
 import { Form, json } from "react-router-dom";
 import { FormularioComitente } from "./FormularioComitente";
+import { PadronXLSXNavBar } from "./PadronXLSXNavBar";
 
 
-export const PadComForm = () => {
+export const PadronXLSXForm = () => {
     
     const formInicial = {
-        codigoComitente: '',
-        codigoDepositante:'',
-        tipoComitenteID: 1,
-        numeroCondominio: '',
-        lugarRegPubComercio: '', 
-        numeroImpuestoGanancias: '', 
-        UsuarioModifica: 'OLB', 
-        tipoPersonaID: 1,
-        tipoDocumentoID: 1,
-        numeroDocumento: '',        
-        nombre:'',
-        apellidos:'',
-        nacionalidadID: 1,
-        telefonoContacto: '',
-        email: '',
-        tipoDomicilioID: 1,
-        calle: '',
-        numero: '',
-        piso: '',
-        departamento: '',
-        otros: '',
-        localidadID: 1
+        NumeroAccionista: null,
+        NumeroDepositanteCVSA: null,
+        ALYCLegajo: null,
+        CUITLegajo: null,
+        NombreLegajo: null,
+        TipoPersonaLegajo: null,
+        CategoriaLegajo: null,
+        CategoriaReporteESG: null,
+        NacionalidadLegajo: null,
+        GrupoLegajo: null,
+        Mail1Legajo: null,
+        PersonaContactoAsamblea: null,
+        Mail2Legajo: null,
+        Mail3Legajo: null,
+        TelefonoLegajo: null,
+        LocalidadLegajo: null,
+        ProvinciaLegajo: null,
+        PaisLegajo: null
     };
 
     const [formState, setFormState] = useState(formInicial);
@@ -62,10 +59,11 @@ export const PadComForm = () => {
         });
     }
 
+    
     const handleSubmit = (event) => {
         event.preventDefault();
       
-        const url = 'https://localhost:32770/api/Comitentes';
+        const url = 'https://localhost:32770/api/PadronXLSX';
       
           fetch(url, {
           method: 'POST',
@@ -104,11 +102,11 @@ export const PadComForm = () => {
     return (
         <Container>
           
-        <PadComNavBar/>
+        <PadronXLSXNavBar/>
         <>
 
        
-            <h3 className="mt-3">Formulario PadCom</h3> 
+            <h3 className="mt-3">Formulario Padrón Xlsx</h3> 
             <div className="alert alert-warning"> Formulario en construcción </div>
             <hr />
             

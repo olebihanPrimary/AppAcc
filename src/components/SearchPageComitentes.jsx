@@ -69,7 +69,7 @@ const q = '';
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-  
+    
     await fetch(`https://${url}/api/Comitentes/${searchText}`)
       .then(response => response.json())
       .then(data => {

@@ -7,7 +7,7 @@ import {
   AiOutlineApartment,
   AiOutlineSetting,
 } from "react-icons/ai";
-import { MdOutlineAnalytics, MdLogout, MdAccessibility,MdConstruction ,MdAutoAwesomeMotion} from "react-icons/md";
+import { MdOutlineAnalytics, MdLogout, MdAccessibility, MdChecklist,MdConstruction ,MdAutoAwesomeMotion} from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { ThemeContext } from "../App";
@@ -101,10 +101,21 @@ const linksArray = [
     to: "/accionistaslista",
   },
   {
+    label: "Cuentas",
+    icon: <MdChecklist />,
+    to: "/accionistaslista",
+  },
+  {
     label: "Descargas Padrón",
     icon: <MdAutoAwesomeMotion />,
     to: "/PadComLista",
   },
+  {
+    label: "Descargas Padrón XLSX",
+    icon: <MdAutoAwesomeMotion />,
+    to: "/PadronXLSXLista",
+  },
+
   {
     label: "Reportes",
     icon: <MdOutlineAnalytics />,

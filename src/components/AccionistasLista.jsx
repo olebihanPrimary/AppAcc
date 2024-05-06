@@ -61,25 +61,25 @@ export const AccionistasLista = () => {
             <h3 className="mt-3">Lista Accionistas</h3> 
             <hr />
 
-            <table className="container ms-3">
+            <table className="Container ms-3">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
                     
-                    <th scope="col">Código Accionista</th>              
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Email</th>
+                    <th scope="col" className="px-4">Código Accionista</th>              
+                    <th scope="col" className="px-4">Nombre</th>
+                    <th scope="col" className="px-4">Apellido</th>
+                    <th scope="col" className="px-4">Email</th>
                   </tr>
                 </thead>
                 <tbody>
                     {data.map((item, index) => (
                       <tr key={index} className={index % 2 === 0 ? "bg-color" : ''}>
-                        <th scope="row" >{index + 1}</th>
-                        <td>{item.codigoAccionista}</td>
-                        <td>{item.nombre}</td>
-                        <td>{item.apellidos}</td>
-                        <td>{item.email}</td>
+                        <th className="px-4" scope="row" >{index + 1}</th>
+                        <td className="px-4">{item.codigoAccionista}</td>
+                        <td className="px-4">{item.nombre}</td>
+                        <td className="px-4">{item.apellidos}</td>
+                        <td className="px-4">{item.email}</td>
                       </tr>
                     ))}
                 </tbody>

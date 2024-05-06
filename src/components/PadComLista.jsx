@@ -5,6 +5,8 @@ import { PadComNavBar } from "./PadComNavBar";
 import { useFetch } from "../hooks/useFetch";
 import { LoadingMessage } from "./LoadingMessage";
 import { ComitenteCard } from "./ComitenteCard";
+import { VarContext } from "../App";
+import { useContext } from "react";
 
 
 export const PadComLista = () => {
@@ -12,9 +14,10 @@ export const PadComLista = () => {
     const [data, setData] = useState([]);  
     
     /* const {data, isLoading} = useFetch ( 'https://localhost:32768/api/Comitentes/consultapersonas' ); */
-    
+    const url = useContext(VarContext);
+
      useEffect(() => {
-        fetch('https://localhost:32768/api/Comitentes/consultapersonas')
+        fetch(`https://${url}/api/PadCom`)
           .then(response => response.json())
           .then(data => setData(data))
           .catch(error => console.error(error));
@@ -32,26 +35,28 @@ export const PadComLista = () => {
             <h4 className="mt-3">Padrón Descargas</h4> 
             <hr />
  
-            <table className="container ms-3">
+            <table className="Container ms-3">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Comitente</th>
-                    <th scope="col">Depositante</th>                  
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Email</th>
+                    <th className="px-2" scope="col">Comitente</th>
+                    <th className="px-2" scope="col">Depositante</th>                  
+                    <th className="px-2" scope="col">CUIT</th>                  
+                    <th className="px-2" scope="col">Nombre Cuenta</th>
+                    <th className="px-2" scope="col">Denominación</th>
+                    <th className="px-2 text-end" scope="col" >Tenencia</th>
                   </tr>
                 </thead>
                 <tbody>
                     {data.map((item, index) => (
                       <tr key={index} className={index % 2 === 0 ? "bg-color" : ''}>
                         <th scope="row" >{index + 1}</th>
-                        <td>{item.codigoComitente}</td>
-                        <td>{item.codigoDepositante}</td>
-                        <td>{item.nombre}</td>
-                        <td>{item.apellidos}</td>
-                        <td>{item.email}</td>
+                        <td>{item.comitente}</td>
+                        <td>{item.depositante}</td>
+                        <td>{item.cuit}</td>
+                        <td>{item.nombrE_CUENTA}</td>
+                        <td>{item.denominacion}</td>
+                        <td className="text-end">{parseFloat(item.tenencia).toFixed(2)}</td>
                       </tr>
                     ))}
                 </tbody>
