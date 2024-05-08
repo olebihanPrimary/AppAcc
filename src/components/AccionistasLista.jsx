@@ -4,42 +4,30 @@ import { Message } from "./Messaje";
 import { AccionistasNavBar } from "./AccionistasNavBar";
 import { VarContext } from "../App";
 import { useContext } from "react";
+import { SearchContext } from "../context/SearchContext";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 export const AccionistasLista = () => {
 
-   /*  const [formState, setFormState] = useState({
-        username: 'strider',
-        email: 'olebihan@google.com'
-    });
-
-    const { username, email } = formState;
-
-    const onInputChange = ({ target }) => {
-        const { name, value } = target;
-        setFormState({
-            ...formState,
-            [ name ]: value
-        });
-    }
-
-
-    useEffect( () => {
-        // console.log('useEffect called!');
-    }, []);
-    
-    useEffect( () => {
-        // console.log('formState changed!');
-    }, [formState]);
-
-    useEffect( () => {
-        // console.log('email changed!');
-    }, [ email ]); */
+  
     const [data, setData] = useState([]);
 
-    
+    const { stringBuscar, setStringBuscar} = useContext(SearchContext);
     
     const url = useContext(VarContext);
+
+    const navigate = useNavigate();
+
+    const ActStringBuscar = (valor) => {
+
+        console.log('String Buscar ' +valor)
+
+        setStringBuscar(valor);
+
+        navigate('../searchpageaccionistas');
+
+    }
     
     /* const {data, isLoading} = useFetch ( 'https://localhost:32768/api/Comitentes/consultapersonas' ); */
     
@@ -76,7 +64,7 @@ export const AccionistasLista = () => {
                     {data.map((item, index) => (
                       <tr key={index} className={index % 2 === 0 ? "bg-color" : ''}>
                         <th className="px-4" scope="row" >{index + 1}</th>
-                        <td className="px-4">{item.codigoAccionista}</td>
+                        <td className="codigoAccionista px-4" onClick={()=>{ActStringBuscar(item.codigoAccionista)}} >{item.codigoAccionista}</td>
                         <td className="px-4">{item.nombre}</td>
                         <td className="px-4">{item.apellidos}</td>
                         <td className="px-4">{item.email}</td>
@@ -119,6 +107,10 @@ const Container =styled.div`
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
   padding: 1rem;
+}
+
+.codigoAccionista:hover {
+  background-color: #7FFFD4; /* Cambia el color de fondo al pasar el mouse por encima */
 }
 
 .grid-item {

@@ -7,6 +7,8 @@ import { LoadingMessage } from "./LoadingMessage";
 import { ComitenteCard } from "./ComitenteCard";
 import { VarContext } from "../App";
 import { useContext } from "react";
+import { SearchContext } from "../context/SearchContext";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -14,6 +16,23 @@ import { useContext } from "react";
 export const ComitentesLista = () => {
 
     const [data, setData] = useState([]);  
+
+  
+
+    const { stringBuscar, setStringBuscar} = useContext(SearchContext);
+
+    const navigate = useNavigate();
+
+    
+    const ActStringBuscar = (valor) => {
+
+        console.log('String Buscar ' +valor)
+
+        setStringBuscar(valor);
+
+        navigate('../searchpagecomitentes');
+
+    }
     
     /* const {data, isLoading} = useFetch ( 'https://localhost:32768/api/Comitentes/consultapersonas' ); */
     
@@ -53,7 +72,7 @@ export const ComitentesLista = () => {
                     {data.map((item, index) => (
                       <tr key={index} className={index % 2 === 0 ? "bg-color" : ''}>
                         <th className="px-4" scope="row" >{index + 1}</th>
-                        <td className="px-4">{item.codigoComitente}</td>
+                        <td className="codigoComitente px-4" onClick={()=>{ActStringBuscar(item.codigoComitente)}} >{item.codigoComitente}</td>
                         <td className="px-4">{item.codigoDepositante}</td>
                         <td className="px-4">{item.nombre}</td>
                         <td className="px-4">{item.apellidos}</td>
@@ -99,6 +118,10 @@ const Container =styled.div`
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
   padding: 1rem;
+}
+
+.codigoComitente:hover {
+  background-color: #7FFFD4; /* Cambia el color de fondo al pasar el mouse por encima */
 }
 
 .grid-item {

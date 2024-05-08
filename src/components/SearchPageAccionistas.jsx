@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { FormularioAccionista } from './FormularioAccionista';
 import { VarContext } from "../App";
 import { useContext } from "react";
+import { SearchContext } from '../context/SearchContext';
 
 
 export const SearchPageAccionistas = () => {
@@ -20,12 +21,10 @@ export const SearchPageAccionistas = () => {
  /* console.log(data) */
 
 
-
-
-const q = '';
+ const {stringBuscar} = useContext(SearchContext);
 
   const { searchText, onInputChange } = useForm({
-    searchText: q
+    searchText: stringBuscar
   }); 
 
   const formInicial = {
@@ -53,6 +52,9 @@ const q = '';
     localidadID: 1
 };
 
+
+
+  
   const [data, setData] = useState(formInicial);
   const [mostrar,setMostrar] = useState(data);
 

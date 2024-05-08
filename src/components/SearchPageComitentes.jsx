@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { FormularioComitente } from './FormularioComitente';
 import { useContext } from 'react';
 import { VarContext } from '../App';
+import { SearchContext } from '../context/SearchContext';
 
 
 export const SearchPageComitentes = () => {
@@ -18,11 +19,11 @@ export const SearchPageComitentes = () => {
   const location = useLocation();
 
 
+  const {stringBuscar} = useContext(SearchContext);
 
-const q = '';
-
+  console.log('esta es la rta '+stringBuscar)
   const { searchText, onInputChange } = useForm({
-    searchText: q
+    searchText: stringBuscar
   }); 
 
   const formInicial = {
