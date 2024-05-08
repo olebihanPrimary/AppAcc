@@ -14,15 +14,42 @@ import { PadronXLSXNavBar } from "./PadronXLSXNavBar";
 import { Link, NavLink} from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { SearchContext } from "../context/SearchContext";
+import { useForm } from "../hooks/useForm";
 
 export const PadronXLSXLista = () => {
+
+    const { stringBuscar, setStringBuscar} = useContext(SearchContext);
+    const { searchText, onInputChange } = useForm({
+      searchText: stringBuscar
+    });
+
+  
     const [data, setData] = useState([]);  
 
+    const url = useContext(VarContext);
     
-    const { stringBuscar, setStringBuscar} = useContext(SearchContext);
     
+    const [endPoint, setEndPoint ] = useState(`https://${url}/api/PadronXLSX`)
 
     const navigate = useNavigate();
+
+    const handleSubmit = async (event) => {
+
+      event.preventDefault();
+  
+      console.log();
+
+        if ( searchText == null ){
+          
+          setEndPoint(`https://${url}/api/PadronXLSX/nombre/0`)
+
+        } else {
+
+          setEndPoint(`https://${url}/api/PadronXLSX/nombre/${searchText}`)
+
+        }
+      
+      }    
 
     const ActStringBuscar = (valor) => {
 
@@ -34,18 +61,18 @@ export const PadronXLSXLista = () => {
     }
     
     /* const {data, isLoading} = useFetch ( 'https://localhost:32768/api/Comitentes/consultapersonas' ); */
-    const url = useContext(VarContext);
+
 
      useEffect(() => {
         
-         fetch(`https://${url}/api/PadronXLSX`)
+         fetch(endPoint)
           .then(response => response.json())
           .then(data => setData(data))
           .catch(error => console.error(error)); 
         
         //const {data, isLoading, hasError} = useFetch(`https://${url}/api/PadronXLSX`)
           
-      }, []); 
+      }, [endPoint]); 
 
 /*       console.log(data) */
   
@@ -54,6 +81,30 @@ export const PadronXLSXLista = () => {
         <Container>
             
             <PadronXLSXNavBar/>
+
+            <div className="row ms-2">
+
+            <div className="col-5">
+            {/*  <h4>Búsqueda por cuenta</h4> */}
+              <hr />
+              <form onSubmit={ handleSubmit } className='d-flex'>
+                <input 
+                  type="text"
+                  placeholder="búsqueda por nombre"
+                  className="form-control"
+                  name="searchText"
+                  autoComplete="off"
+                  value={ searchText }
+                  onChange={ onInputChange } 
+                />
+
+                <button type="summit" className="btn btn-outline-success ms-2">
+                  Buscar
+                </button>
+
+              </form>
+            </div>
+            </div>            
 
 
             <h4 className="mt-3">Padrón Descargas</h4> 

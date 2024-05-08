@@ -11,8 +11,6 @@ import { SearchContext } from "../context/SearchContext";
 import { useNavigate } from "react-router-dom";
 
 
-
-
 export const ComitentesLista = () => {
 
     const [data, setData] = useState([]);  

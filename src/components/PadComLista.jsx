@@ -9,17 +9,46 @@ import { VarContext } from "../App";
 import { useContext } from "react";
 import { SearchContext } from "../context/SearchContext";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "../hooks/useForm";
 
 
 export const PadComLista = () => {
 
+    const p = '';
+
+    const { searchText, onInputChange } = useForm({
+      searchText: p
+    }); 
+ 
+
     const [data, setData] = useState([]);  
+
+    const url = useContext(VarContext);
 
     const { stringBuscar, setStringBuscar} = useContext(SearchContext);
     
-    
+    const [endPoint, setEndPoint ] = useState(`https://${url}/api/PadCom`)
 
     const navigate = useNavigate();
+
+    const handleSubmit = async (event) => {
+
+      event.preventDefault();
+  
+      console.log();
+
+        if ( searchText == null ){
+          
+          setEndPoint(`https://${url}/api/PadCom/nombre/0`)
+
+        } else {
+
+          setEndPoint(`https://${url}/api/PadCom/nombre/${searchText}`)
+
+        }
+      
+      }
+
 
     const ActStringBuscar = (valor) => {
 
@@ -31,14 +60,14 @@ export const PadComLista = () => {
     }
     
     /* const {data, isLoading} = useFetch ( 'https://localhost:32768/api/Comitentes/consultapersonas' ); */
-    const url = useContext(VarContext);
+   
 
-     useEffect(() => {
-        fetch(`https://${url}/api/PadCom`)
+      useEffect(() => {
+         fetch(endPoint)
           .then(response => response.json())
           .then(data => setData(data))
           .catch(error => console.error(error));
-      }, []); 
+      }, [endPoint]); 
 
 /*       console.log(data) */
   
@@ -47,6 +76,32 @@ export const PadComLista = () => {
         <Container>
 
             <PadComNavBar/>
+
+            
+            <div className="row ms-2">
+
+              <div className="col-5">
+               {/*  <h4>Búsqueda por cuenta</h4> */}
+                <hr />
+                <form onSubmit={ handleSubmit } className='d-flex'>
+                  <input 
+                    type="text"
+                    placeholder="búsqueda por cuenta"
+                    className="form-control"
+                    name="searchText"
+                    autoComplete="off"
+                    value={ searchText }
+                    onChange={ onInputChange } 
+                  />
+
+                  <button type="summit" className="btn btn-outline-success ms-2">
+                    Buscar
+                  </button>
+
+                </form>
+              </div>
+              </div>
+            
 
 
             <h4 className="mt-3">Padrón Descargas</h4> 

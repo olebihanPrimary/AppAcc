@@ -65,8 +65,7 @@ const {stringBuscar} = useContext(SearchContext);
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-
-    await fetch(`https://${url}/api/PadronXLSX/${searchText}`)
+     fetch(`https://${url}/api/PadronXLSX/numeroaccionista/${searchText}`)
       .then(response => response.json())
       .then(data => {
         if (data === null) {

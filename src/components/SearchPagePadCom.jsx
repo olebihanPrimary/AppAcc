@@ -121,7 +121,8 @@ export const SearchPagePadCom = () => {
 
             </form>
           </div>
-          </div>
+        </div>
+        
           <div className="row">
 
           <div className="col-12">
