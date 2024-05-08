@@ -7,9 +7,12 @@ import { Sidebar } from "./components/Sidebar";
 import { Light, Dark } from "./styles/Themes";
 import { ThemeProvider } from "styled-components";
 import { AuthProvider } from "./context/AuthProvider";
+import { SearchContext } from "./context/SearchContext";
+import { SearchProvider } from "./context/SearchProvider";
 
 export const ThemeContext = React.createContext(null);
 export const VarContext = React.createContext(null);
+
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -21,7 +24,9 @@ function App() {
       <ThemeContext.Provider value={{ setTheme, theme }}>
         <ThemeProvider theme={themeStyle}>
 
-         <AuthProvider> 
+
+        <AuthProvider> 
+        <SearchProvider >
          <VarContext.Provider value={'localhost:32768'}>
           <BrowserRouter>
             <Container className={sidebarOpen ? "sidebarState active" : ""}>
@@ -33,6 +38,7 @@ function App() {
             </Container>
           </BrowserRouter>
           </VarContext.Provider>
+          </SearchProvider>
          </AuthProvider> 
           
         </ThemeProvider>

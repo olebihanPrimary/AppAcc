@@ -1,9 +1,19 @@
+import { useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
+import { SearchContext } from '../context/SearchContext';
+
+
 
 export const PadronXLSXNavBar = () => {
 
+    
+    
     const navigate = useNavigate();
+    const { stringBuscar, setStringBuscar} = useContext(SearchContext);
+    const ResetSearchText = ()=>{
+        setStringBuscar('buscar');
+    }
 
     const onLogout = () => {
         navigate('/login', {
@@ -19,6 +29,7 @@ export const PadronXLSXNavBar = () => {
                 <div className="navbar-nav">
 
                     <NavLink 
+                        onClick={()=>{ResetSearchText()}}
                         className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
                         to="/PadronXLSXlista"
                     >

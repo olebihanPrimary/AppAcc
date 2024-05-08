@@ -5,14 +5,33 @@ import { PadComNavBar } from "./PadComNavBar";
 import { useFetch } from "../hooks/useFetch";
 import { LoadingMessage } from "./LoadingMessage";
 import { ComitenteCard } from "./ComitenteCard";
-import { VarContext } from "../App";
+
+import {  VarContext } from "../App";
 import { useContext } from "react";
+
+
 import { PadronXLSXNavBar } from "./PadronXLSXNavBar";
+import { Link, NavLink} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { SearchContext } from "../context/SearchContext";
 
 export const PadronXLSXLista = () => {
     const [data, setData] = useState([]);  
 
     
+    const { stringBuscar, setStringBuscar} = useContext(SearchContext);
+    
+
+    const navigate = useNavigate();
+
+    const ActStringBuscar = (valor) => {
+
+        console.log('String Buscar ' +stringBuscar)
+        setStringBuscar(valor);
+
+        navigate('../searchPagePadronXLSX');
+
+    }
     
     /* const {data, isLoading} = useFetch ( 'https://localhost:32768/api/Comitentes/consultapersonas' ); */
     const url = useContext(VarContext);
@@ -56,7 +75,8 @@ export const PadronXLSXLista = () => {
                     {data.map((item, index) => (
                       <tr key={index} className={index % 2 === 0 ? "bg-color" : ''}>
                         <th scope="row" >{index + 1}</th>
-                        <td>{item.numeroAccionista}</td>
+                        
+                        <td onClick={() => ActStringBuscar(item.numeroAccionista)}>{item.numeroAccionista}</td>
                         <td>{item.numeroDepositanteCVSA}</td>
                         <td>{item.cuitLegajo}</td>
                         <td>{item.nombreLegajo}</td>

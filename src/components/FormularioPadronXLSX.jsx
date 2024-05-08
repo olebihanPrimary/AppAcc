@@ -4,14 +4,14 @@ export const FormularioPadronXLSX = ({respuesta}) => {
     console.log('previo al undefine')
     console.log(JSON.stringify(respuesta))
 
-    const {  NumeroAccionista, NumeroDepositanteCVSA, ALYCLegajo, CUITLegajo,
-    NombreLegajo, TipoPersonaLegajo,CategoriaLegajo, CategoriaReporteESG,
-    NacionalidadLegajo,GrupoLegajo, Mail1Legajo,PersonaContactoAsamblea,
-    Mail2Legajo ,Mail3Legajo,TelefonoLegajo, LocalidadLegajo, ProvinciaLegajo,
-     PaisLegajos} = JSON.stringify(respuesta); 
+    const {  numeroAccionista, numeroDepositanteCVSA,alycLegajo,cuitLegajo,
+        nombreLegajo,tipoPersonaLegajo,categoriaLegajo,categoriaReporteESG,
+        nacionalidadLegajo,grupoLegajo,mail1Legajo,personaContactoAsamblea,
+        mail2Legajo,mail3Legajo,telefonoLegajo,localidadLegajo,provinciaLegajo,
+        paisLegajos} = JSON.stringify(respuesta); 
         /* const {respuesta} = respuesta; */
 
-        console.log("REspuesta "+CUITLegajo);
+        console.log("REspuesta "+respuesta.numeroAccionista);
     
   return (
     
@@ -23,23 +23,23 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                 <input readOnly
                     type="text" 
                     className="form-control form-control-sm"
-                    placeholder="Número Comitente"
+                    placeholder="Número Accionista"
                     name="numeroAccionista"
-                    value={ respuesta.NumeroAccionista === null ? "Número": respuesta.NumeroAccionista }
+                    value={ respuesta.numeroAccionista === null ? "Número": respuesta.numeroAccionista }
                 />
                 </div>
             </div>
 
             <div className="row align-items-center"> 
   
-                <label className="col-sm-2 col-form-label col-form-label-sm">Tipo Registro</label>
+                <label className="col-sm-2 col-form-label col-form-label-sm">Nro Depositante CVSA</label>
                 <div className="col-sm-3">
                     <input readOnly
                         type="text" 
                         className="form-control form-control-sm mt-2"
-                        placeholder="Tipo de registro"
-                        name="tipoComitenteID"
-                        value={ respuesta.tipO_REGISTRO }
+                        placeholder="Nro Depositante"
+                        name="numeroDepositanteCVSA"
+                        value={ respuesta.numeroDepositanteCVSA }
 
                     />
 
@@ -47,14 +47,14 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                 </div>
 
             
-                <label className="col-sm-2 col-form-label col-form-label-sm">Cód. Depositante:</label>
+                <label className="col-sm-2 col-form-label col-form-label-sm">CUIT:</label>
                 <div className="col-sm-3">
                     <input readOnly
                         type="text" 
                         className="form-control form-control-sm mt-2"
-                        placeholder="Codigo Depositante"
-                        name="codigoDepositante"
-                        value={ respuesta.depositante }
+                        placeholder="CUIT Legajo"
+                        name="cuitLegajo"
+                        value={ respuesta.cuitLegajo }
                     
                     />
                 </div>
@@ -63,26 +63,26 @@ export const FormularioPadronXLSX = ({respuesta}) => {
 
             
             <div className="row align-items-center"> 
-                <label className="col-sm-2 col-form-label col-form-label-sm">Conteo Condominio:</label>
+                <label className="col-sm-2 col-form-label col-form-label-sm">Tipo Persona:</label>
                 <div className="col-sm-3">
                     <input readOnly
                         type="text" 
                         className="form-control form-control-sm mt-2"
-                        placeholder="Conteo Condominio"
-                        name="conteoCondominio"
-                        value={ respuesta.conteO_CONDOMINIOS }
+                        placeholder="Tipo Persona"
+                        name="tipoPersonaLegajo"
+                        value={ respuesta.tipoPersonaLegajo }
                     
                     />
                 </div>
 
-                <label className="col-sm-2 col-form-label col-form-label-sm">Código Especie:</label>
+                <label className="col-sm-2 col-form-label col-form-label-sm">Categoría:</label>
                 <div className="col-sm-3">
                     <input readOnly
                         type="text" 
                         className="form-control form-control-sm mt-2"
-                        placeholder="Código Especie"
-                        name="codEspecie"
-                        value={ respuesta.coD_ESPECIE }
+                        placeholder="Categoría"
+                        name="categoriaLegajo"
+                        value={ respuesta.categoriaLegajo }
                     
                     />
                 </div>
@@ -91,14 +91,14 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             </div>    
  
             <div className="row align-items-center"> 
-                <label className="col-sm-2 col-form-label col-form-label-sm">Bloqueo especie:</label>
+                <label className="col-sm-2 col-form-label col-form-label-sm">Grupo:</label>
                 <div className="col-sm-3">
                     <input readOnly
                         type="text" 
                         className="form-control form-control-sm mt-2"
-                        placeholder="Bloqueo Especie"
-                        name="bloqueoEspecie"
-                        value={ respuesta.bloqueO_ESPECIE }
+                        placeholder="Grupo"
+                        name="grupoLegajo"
+                        value={ respuesta.grupoLegajo }
                     />
                 </div>
             </div>        
@@ -110,7 +110,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2 bg-info"
                         placeholder="Tenencia"
                         name="tenencia"
-                        value={ parseFloat(respuesta.tenencia).toFixed(2) }
+                        value={ parseFloat('0').toFixed(2) }
                     
                     />
                 </div>
@@ -124,28 +124,28 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="Nombre Cuenta"
-                        name="nombreCuenta"
-                        value={ respuesta.nombrE_CUENTA }
+                        name="nombreLegajo"
+                        value={ respuesta.nombreLegajo }
                     
                     />
                 </div>
             </div>
             <div className="row align-items-center">
-                <label className="col-sm-2 col-form-label col-form-label-sm">Denominación:</label>
-                <div className="col-sm-7">
+                <label className="col-sm-2 col-form-label col-form-label-sm">Contacto Asamblea:</label>
+                <div className="col-sm-8">
                     <input readOnly
                         type="text" 
                         className="form-control form-control-sm mt-2"
-                        placeholder="Denominacion"
-                        name="denominacion"
-                        value={ respuesta.denominacion }
+                        placeholder="Contacto Asamblea"
+                        name="personaContactoAsamblea"
+                        value={ respuesta.personaContactoAsamblea }
                     />
                 </div>
             </div>        
             <div className="row align-items-center">
 
-                <label className="col-sm-2 col-form-label col-form-label-sm">Dato Registral:</label>
-                <div className="col-sm-3">
+                <label className="col-sm-2 col-form-label col-form-label-sm">Mail 1:</label>
+                <div className="col-sm-8">
 
 {/*                     <select className="form-select mt-2" name="tipoDocumentoID" id="exampleSelect"
                          defaultValue={"DEFAULT"}
@@ -160,73 +160,105 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                     <input readOnly
                         type="text" 
                         className="form-control form-control-sm mt-2"
-                        placeholder="Dato Registral"
-                        name="datoRegistral"
-                        value={ respuesta.datO_REGISTRAL === null ? 'S/T': respuesta.datO_REGISTRAL}
+                        placeholder="Mail 1"
+                        name="mail1Legajo"
+                        value={ respuesta.mail1Legajo === null ? '-': respuesta.mail1Legajo}
                        
                     /> 
                 </div>
-                <label className="col-sm-2 col-form-label col-form-label-sm">Nro.Registral:</label>
-                <div className="col-sm-3">                          
+            </div>
+            <div className="row align-items-center">
+
+                <label className="col-sm-2 col-form-label col-form-label-sm">Mail 2:</label>
+                <div className="col-sm-8">                          
                     <input readOnly
                         type="text" 
                         className="form-control form-control-sm mt-2"
-                        placeholder="Número Registral"
-                        name="nro_registral"
-                        value={ respuesta.nrO_REGISTRAL }
+                        placeholder="Mail 2"
+                        name="mail2Legajo"
+                        value={ respuesta.mail2Legajo }
                     />
                 </div>
 
 
             </div>      
-           {/*  <div className="row align-items-center">
-                <label className="col-sm-2 col-form-label col-form-label-sm">Teléfono contacto:</label>
-                <div className="col-sm-7">                                 
-                    <input readOnly
-                        type="text" 
-                        className="form-control form-control-sm mt-2"
-                        placeholder="telefono Contacto"
-                        name="telefonoContacto"
-                        value={ respuesta.telefonoContacto === null ? "sin telefono": respuesta.telefonoContacto }
-                    />
-                </div>
-            </div>
             <div className="row align-items-center">
-                <label className="col-sm-2 col-form-label col-form-label-sm">Email:</label>
-                <div className="col-sm-7">                                 
-                    <input readOnly
-                        type="email" 
-                        className="form-control form-control-sm mt-2"
-                        placeholder="Email"
-                        name="email"
-                        value={ respuesta.email }
-                    />
-                </div>
-            </div>   */}
+
+            <label className="col-sm-2 col-form-label col-form-label-sm">Mail 3:</label>
+            <div className="col-sm-8">                          
+                <input readOnly
+                    type="text" 
+                    className="form-control form-control-sm mt-2"
+                    placeholder="Mail 3"
+                    name="mail3Legajo"
+                    value={ respuesta.mail3Legajo }
+                />
+            </div>
+
+
+            </div>   
+           
 
             <hr />
             <div className="row align-items-center">
-                <label className="col-sm-2 col-form-label col-form-label-sm">Tipo Domicilio:</label>
-                <div className="col-sm-1">                                 
+                <label className="col-sm-2 col-form-label col-form-label-sm">Teléfono:</label>
+                <div className="col-sm-8">                                 
                     <input readOnly
                         type="text" 
                         className="form-control form-control-sm mt-2"
-                        placeholder="Tipo Domicilio"
-                        name="tipoDomicilioID"
-                        value={ respuesta.tipoDomicilioID === null ? 'S/T' : respuesta.tipoDomicilioID }
+                        placeholder="teléfono"
+                        name="telefonoLegajo"
+                        value={ respuesta.telefonoLegajo === null ? 'S/T' : respuesta.telefonoLegajo }
                     />
                 </div>
             </div>
 
+
             <div className="row align-items-center"> 
-                <label className="col-sm-2 col-form-label col-form-label-sm">Domicilio</label>
+                <label className="col-sm-2 col-form-label col-form-label-sm">Pais</label>
+                <div className="col-sm-2">
+                    <input readOnly
+                        type="text" 
+                        className="form-control form-control-sm mt-2"
+                        placeholder="pais"
+                        name="paisLegajo"
+                        value={ respuesta.paisLegajos }
+                    />
+                </div>
+            </div>         
+            <div className="row align-items-center">
+                <label className="col-sm-2 col-form-label col-form-label-sm">Provincia:</label>
+                <div className="col-sm-8">
+                    <input readOnly
+                        type="text" 
+                        className="form-control form-control-sm mt-2"
+                        placeholder="provincia"
+                        name="provincia"
+                        value={ respuesta.provinciaLegajo }
+                    />
+                </div>
+    {/*             <label className="col-sm-2 col-form-label col-form-label-sm">cod.Postal:</label>
+                <div className="col-sm-2">
+                    <input readOnly
+                        type="text" 
+                        className="form-control form-control-sm mt-2"
+                        placeholder="codPostal"
+                        name="codPostal"
+                        value={ respuesta.c_POS }
+                    />
+                </div> */}
+
+
+            </div>               
+            <div className="row align-items-center"> 
+                <label className="col-sm-2 col-form-label col-form-label-sm">Localidad</label>
                 <div className="col-sm-6">
                     <input readOnly
                         type="text" 
                         className="form-control form-control-sm mt-2"
-                        placeholder="domicilio"
-                        name="domicilio"
-                        value={ respuesta.domicilio }
+                        placeholder="localidad"
+                        name="loscalidadLegajo"
+                        value={ respuesta.localidadLegajo }
                     />
                 </div>
 
@@ -243,41 +275,8 @@ export const FormularioPadronXLSX = ({respuesta}) => {
 
 
             </div>
-            <div className="row align-items-center"> 
-                <label className="col-sm-2 col-form-label col-form-label-sm">Pais</label>
-                <div className="col-sm-2">
-                    <input readOnly
-                        type="text" 
-                        className="form-control form-control-sm mt-2"
-                        placeholder="pais"
-                        name="pais"
-                        value={ respuesta.pais }
-                    />
-                </div>
-
-                <label className="col-sm-2 col-form-label col-form-label-sm">Provincia:</label>
-                <div className="col-sm-2">
-                    <input readOnly
-                        type="text" 
-                        className="form-control form-control-sm mt-2"
-                        placeholder="provincia"
-                        name="provincia"
-                        value={ respuesta.provincia }
-                    />
-                </div>
-                <label className="col-sm-2 col-form-label col-form-label-sm">cod.Postal:</label>
-                <div className="col-sm-2">
-                    <input readOnly
-                        type="text" 
-                        className="form-control form-control-sm mt-2"
-                        placeholder="codPostal"
-                        name="codPostal"
-                        value={ respuesta.c_POS }
-                    />
-                </div>
 
 
-            </div>
 
 
     </div>

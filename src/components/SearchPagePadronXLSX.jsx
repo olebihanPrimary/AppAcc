@@ -1,8 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string' 
 import styled from "styled-components";
-import { getHeroesByName } from '../helpers'; 
-import { PadComNavBar } from './PadComNavBar';
 import { useForm } from '../hooks/useForm';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -10,6 +8,7 @@ import { FormularioPadronXLSX } from './FormularioPadronXLSX';
 import { VarContext } from "../App";
 import { useContext } from "react";
 import { PadronXLSXNavBar } from './PadronXLSXNavBar';
+import { SearchContext } from '../context/SearchContext';
 
 export const SearchPagePadronXLSX = () => {
 
@@ -20,12 +19,10 @@ export const SearchPagePadronXLSX = () => {
  /* console.log(data) */
 
 
-
-
-const q = '';
+const {stringBuscar} = useContext(SearchContext);
 
   const { searchText, onInputChange } = useForm({
-    searchText: q
+    searchText: stringBuscar
   }); 
 
   const formInicial = {
@@ -85,9 +82,6 @@ const q = '';
       });
     }
  
-    
-
-
   return (
     <Container>
       <PadronXLSXNavBar />
@@ -149,33 +143,6 @@ const q = '';
              <Container className='container-lista'>
              
              
-             {/* <div className="row">
-
-               <div className="col-4">
-                <p>{data.codigoDepositante}</p>
-              </div>
-              <div className="col-4">
-                <p>{}</p>
-              </div>
-              <div className="col-4">
-                <p>{data.comitenteID}</p>
-              </div> 
-
-              <div className="row">
-                <label className="col-sm-2 col-form-label col-form-label-sm">Cód. Comitente:</label>
-                <div className="col-sm-3">
-                <input 
-                    type="text" 
-                    className="form-control"
-                    placeholder="Codigo Comitente"
-                    name="codigoComitente"
-                    value={ data.codigoComitente }
-                />
-                </div>
-              </div>
-              
-             
-              </div> */}
               <div className="col" 
                 style={{ display: showSearch ? '' : 'none' }}>
               { <FormularioPadronXLSX respuesta = {data}/> } 
