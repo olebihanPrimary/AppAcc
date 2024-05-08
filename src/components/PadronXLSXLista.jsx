@@ -76,7 +76,7 @@ export const PadronXLSXLista = () => {
                       <tr key={index} className={index % 2 === 0 ? "bg-color" : ''}>
                         <th scope="row" >{index + 1}</th>
                         
-                        <td onClick={() => ActStringBuscar(item.numeroAccionista)}>{item.numeroAccionista}</td>
+                        <td className="numeroAccionista" onClick={() => ActStringBuscar(item.numeroAccionista)}>{item.numeroAccionista}</td>
                         <td>{item.numeroDepositanteCVSA}</td>
                         <td>{item.cuitLegajo}</td>
                         <td>{item.nombreLegajo}</td>
@@ -123,6 +123,10 @@ const Container =styled.div`
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
   padding: 1rem;
+}
+
+.numeroAccionista:hover {
+  background-color: #7FFFD4; /* Cambia el color de fondo al pasar el mouse por encima */
 }
 
 .grid-item {

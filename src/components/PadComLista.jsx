@@ -7,11 +7,28 @@ import { LoadingMessage } from "./LoadingMessage";
 import { ComitenteCard } from "./ComitenteCard";
 import { VarContext } from "../App";
 import { useContext } from "react";
+import { SearchContext } from "../context/SearchContext";
+import { useNavigate } from "react-router-dom";
 
 
 export const PadComLista = () => {
 
     const [data, setData] = useState([]);  
+
+    const { stringBuscar, setStringBuscar} = useContext(SearchContext);
+    
+    
+
+    const navigate = useNavigate();
+
+    const ActStringBuscar = (valor) => {
+
+        console.log('String Buscar ' +stringBuscar)
+        setStringBuscar(valor);
+
+        navigate('../searchpagepadcom');
+
+    }
     
     /* const {data, isLoading} = useFetch ( 'https://localhost:32768/api/Comitentes/consultapersonas' ); */
     const url = useContext(VarContext);
@@ -53,7 +70,7 @@ export const PadComLista = () => {
                         <th scope="row" >{index + 1}</th>
                         <td>{item.comitente}</td>
                         <td>{item.depositante}</td>
-                        <td>{item.cuit}</td>
+                        <td className="cuit"  onClick={() => ActStringBuscar(item.cuit)} >{item.cuit}</td>
                         <td>{item.nombrE_CUENTA}</td>
                         <td>{item.denominacion}</td>
                         <td className="text-end">{parseFloat(item.tenencia).toFixed(2)}</td>
@@ -98,6 +115,10 @@ const Container =styled.div`
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
   padding: 1rem;
+}
+
+.cuit:hover {
+  background-color: #7FFFD4; /* Cambia el color de fondo al pasar el mouse por encima */
 }
 
 .grid-item {

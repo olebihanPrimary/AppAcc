@@ -278,6 +278,12 @@ export const FormularioPadCom = ({respuesta}) => {
 
 
             </div>
+            <hr />
+            <div className="row align-items-center">
+                <div className="col">
+                    <button className="btn btn-primary" type="submit">Actualizar</button>    
+                </div>
+            </div> 
 
 
     </div>

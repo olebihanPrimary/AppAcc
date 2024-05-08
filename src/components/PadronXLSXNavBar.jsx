@@ -7,9 +7,9 @@ import { SearchContext } from '../context/SearchContext';
 
 export const PadronXLSXNavBar = () => {
 
-    
-    
+        
     const navigate = useNavigate();
+
     const { stringBuscar, setStringBuscar} = useContext(SearchContext);
     const ResetSearchText = ()=>{
         setStringBuscar('buscar');
@@ -37,6 +37,7 @@ export const PadronXLSXNavBar = () => {
                     </NavLink>
 
                     <NavLink 
+                        onClick={()=>{ResetSearchText()}}
                         className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
                         to="/padronXLSXform"
                     >
@@ -44,6 +45,7 @@ export const PadronXLSXNavBar = () => {
                     </NavLink>
                     
                     <NavLink 
+                        onClick={()=>{ResetSearchText()}}                    
                         className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
                         to="/searchpagepadronXLSX"
                     >

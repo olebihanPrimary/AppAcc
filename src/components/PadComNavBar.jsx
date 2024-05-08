@@ -1,8 +1,17 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
+import { SearchContext } from '../context/SearchContext';
+import { useContext } from 'react';
 
 export const PadComNavBar = () => {
 
+    const { stringBuscar, setStringBuscar} = useContext(SearchContext);
+
+    const ResetSearchText = ()=>{
+        setStringBuscar('buscar');
+    }
+
+    
     const navigate = useNavigate();
 
     const onLogout = () => {
@@ -19,6 +28,7 @@ export const PadComNavBar = () => {
                 <div className="navbar-nav">
 
                     <NavLink 
+                        onClick={()=>{ResetSearchText()}}
                         className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
                         to="/padcomlista"
                     >
@@ -26,6 +36,7 @@ export const PadComNavBar = () => {
                     </NavLink>
 
                     <NavLink 
+                        onClick={()=>{ResetSearchText()}}
                         className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
                         to="/padcomform"
                     >
@@ -33,6 +44,7 @@ export const PadComNavBar = () => {
                     </NavLink>
                     
                     <NavLink 
+                        onClick={()=>{ResetSearchText()}}
                         className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
                         to="/searchpagepadcom"
                     >

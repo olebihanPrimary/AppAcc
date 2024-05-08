@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { FormularioPadCom } from './FormularioPadCom';
 import { VarContext } from "../App";
 import { useContext } from "react";
+import { SearchContext } from '../context/SearchContext';
 
 export const SearchPagePadCom = () => {
 
@@ -20,12 +21,12 @@ export const SearchPagePadCom = () => {
 
 
 
+ const {stringBuscar} = useContext(SearchContext);
 
-const q = '';
+ const { searchText, onInputChange } = useForm({
+   searchText: stringBuscar
+ }); 
 
-  const { searchText, onInputChange } = useForm({
-    searchText: q
-  }); 
 
   const formInicial = {
     codigoComitente: null,
