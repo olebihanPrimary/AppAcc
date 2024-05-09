@@ -111,6 +111,7 @@ const Container =styled.div`
 
 .codigoAccionista:hover {
   background-color: #7FFFD4; /* Cambia el color de fondo al pasar el mouse por encima */
+  cursor: pointer;
 }
 
 .grid-item {

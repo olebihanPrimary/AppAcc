@@ -28,12 +28,13 @@ export const SearchPageAccionistas = () => {
   }); 
 
   const formInicial = {
-    codigoComitente: null,
-    codigoDepositante:'',
-    tipoComitenteID: 1,
-    numeroCondominio: '',
-    lugarRegPubComercio: '', 
-    numeroImpuestoGanancias: '', 
+    accionistaID: null,
+    codigoAccionista: 'código',
+    personaID: 0,
+    tipoRegistroDatoID: 1,
+    lugarRegPubComercio: '',
+    numeroImpuestoGanancias: '',
+    tipoCuentaID: 0, 
     UsuarioModifica: 'OLB', 
     tipoPersonaID: 1,
     tipoDocumentoID: 1,
