@@ -1,21 +1,35 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react';
+import { VarContext } from '../App';
 
 export const FormularioAccionista = ({respuesta}) => {
     /* console.log('previo al undefine') */
-    /* console.log(JSON.stringify(respuesta)) */
+    console.log(JSON.stringify(respuesta)) 
 
         const [formState, setFormState] = useState({respuesta});
+/**
+ {"accionistaID":4,"codigoAccionista":"0264|468","personaID":9436,
+ "tipoRegistroDatoID":1,"lugarRegPubComercio":"--",
+ "numeroImpuestoGanancias":"--","tipoCuentaID":3,
+ "usuarioModifica":"OLB","tipoPersonaID":1,"tipoDocumentoID":2,
+ "numeroDocumento":"20247964976","nombre":"Juan Pedro",
+ "apellidos":"Aristides","nacionalidadID":1,"telefonosContacto":"0236-681730",
+ "celularDifusion":"","email":"jparisti@labragadense.com",
+ "domicilioID":0,"tipoDomicilioID":1,"calle":"España",
+ "numero":"866","piso":"--","departamento":"--","otros":"--","localidadID":1}
+ * 
+ */
+        
 
         const { codigoAccionista, 
             lugarRegPubComercio, numeroImpuestoGanancias, tipoCuentaID,
-            UsuarioModifica, tipoPersonaID, tipoDocumentoID, numeroDocumento, 
-            nombre,apellidos, nacionalidadID, telefonoContacto ,email ,
+            UsuarioModifica, tipoRegistroDatoID, tipoPersonaID,
+             tipoDocumentoID, numeroDocumento, 
+            nombre,apellidos, nacionalidadID, telefonosContacto ,email ,
             tipoDomicilioID, calle, numero, piso, departamento, otros, localidadID} = formState;
         
 
-        /* console.log(codigoAccionista); */
-
+         
          useEffect(() => {
             
             setFormState(respuesta);
@@ -35,28 +49,45 @@ export const FormularioAccionista = ({respuesta}) => {
             });
         }
 
-        const handleSubmit = ( event ) => {
+
+        const varUrl = useContext(VarContext);
+        console.log(varUrl);
+
+        const handleSubmit = async ( event ) => {
 
         event.preventDefault();
 
-        const varUrl = useContext(VarContext);
+ /*         const url = `https://${varUrl}api/Comitentes/update`;
+
+         console.log(url); */
+
+         console.log(JSON.stringify(formState));
+
+         if ( codigoAccionista == 'código') {
+
+            console.log('No va a API');
+
+         }
+         else {
+
+            const resultado = await fetch(`https://${varUrl}/api/accionistas/update`, 
+            {
+            method: 'PUT',
+            headers: {
+                'accept': 'text/plain',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formState)
+            });
+            
+            const data = await response.json();
+            console.log(data);
+
+         }
       
-        const url = `https://${varUrl}/api/Accionistas`;
-      
-          fetch(url, {
-          method: 'PUT',
-          headers: {
-            'accept': 'text/plain',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formState)
-        })
-        .then(response => response.json())
-        .then(data => setResponse(data))
-        .catch((error) => {
-          console.error('Error:', error);
-        }); 
+         
     }
+    
     
   return (
     
@@ -66,6 +97,7 @@ export const FormularioAccionista = ({respuesta}) => {
                 <label className="col-sm-2 col-form-label col-form-label-sm">Cód. Accionista:</label>
                 <div className="col-sm-3">
                 <input  
+                    readOnly
                     type="text" 
                     className="form-control form-control-sm"
                     placeholder="Codigo Accionista"
@@ -110,13 +142,37 @@ export const FormularioAccionista = ({respuesta}) => {
             </div>        
             <div className="row align-items-center"> 
                 <label className="col-sm-2 col-form-label col-form-label-sm">Tipo de persona:</label>
-                <div className="col-sm-3">
+                <div className="col-sm-2">
                     <input  
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="Tipo Persona ID"
                         name="tipoPersonaID"
                         value={ tipoPersonaID }
+                        onChange={ onInputChange }
+                    
+                    />
+                </div>
+                <label className="col-sm-2 col-form-label col-form-label-sm">Tipo de Registro:</label>
+                <div className="col-sm-2">
+                    <input  
+                        type="text" 
+                        className="form-control form-control-sm mt-2"
+                        placeholder="Tipo Registro ID"
+                        name="tipoRegistroDatosID"
+                        value={ tipoRegistroDatoID }
+                        onChange={ onInputChange }
+                    
+                    />
+                </div>
+                <label className="col-sm-2 col-form-label col-form-label-sm">Tipo de Cuenta:</label>
+                <div className="col-sm-2">
+                    <input  
+                        type="text" 
+                        className="form-control form-control-sm mt-2"
+                        placeholder="Tipo Cuenta ID"
+                        name="tipoCuentaID"
+                        value={ tipoCuentaID }
                         onChange={ onInputChange }
                     
                     />
@@ -161,7 +217,7 @@ export const FormularioAccionista = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Tipo Documento"
                         name="tipoDocumentoID"
-                        value={ respuesta.tipoDocumentoID === null ? 'S/T': respuesta.tipoDocumentoID}
+                        value={ tipoDocumentoID === null ? 'S/T': tipoDocumentoID}
                         onChange={ onInputChange }
 
                        
@@ -174,7 +230,7 @@ export const FormularioAccionista = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Numero Documento"
                         name="numeroDocumento"
-                        value={ respuesta.numeroDocumento }
+                        value={ numeroDocumento }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -188,8 +244,8 @@ export const FormularioAccionista = ({respuesta}) => {
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="telefono Contacto"
-                        name="telefonoContacto"
-                        value={ respuesta.telefonoContacto === null ? "sin telefono": respuesta.telefonoContacto }
+                        name="telefonosContacto"
+                        value={ telefonosContacto === null ? "sin telefono": telefonosContacto }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -202,7 +258,7 @@ export const FormularioAccionista = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Email"
                         name="email"
-                        value={ respuesta.email }
+                        value={ email }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -217,7 +273,7 @@ export const FormularioAccionista = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Tipo Domicilio"
                         name="tipoDomicilioID"
-                        value={ respuesta.tipoDomicilioID === null ? 'S/T' : respuesta.tipoDomicilioID }
+                        value={ tipoDomicilioID === null ? '1' : tipoDomicilioID }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -231,7 +287,7 @@ export const FormularioAccionista = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="calle"
                         name="calle"
-                        value={ respuesta.calle }
+                        value={ calle }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -243,7 +299,7 @@ export const FormularioAccionista = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Numero"
                         name="numero"
-                        value={ respuesta.numero }
+                        value={ numero }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -258,7 +314,7 @@ export const FormularioAccionista = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="piso"
                         name="piso"
-                        value={ respuesta.piso }
+                        value={ piso }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -270,7 +326,7 @@ export const FormularioAccionista = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="departamento"
                         name="departamento"
-                        value={ respuesta.departamento }
+                        value={ departamento }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -281,7 +337,7 @@ export const FormularioAccionista = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="otros"
                         name="otros"
-                        value={ respuesta.otros }
+                        value={ otros }
                         onChange={ onInputChange }
                     />
                 </div>
