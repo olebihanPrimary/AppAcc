@@ -1,138 +1,15 @@
-import styled from "styled-components";
-import logo from "../assets/primary.png";
-import { v } from "../styles/Variables";
-import {
-  AiOutlineLeft,
-  AiOutlineHome,
-  AiOutlineApartment,
-  AiOutlineSetting,
-} from "react-icons/ai";
-import { MdOutlineAnalytics, MdLogout, MdAccessibility, MdChecklist,MdConstruction ,MdAutoAwesomeMotion} from "react-icons/md";
-import { NavLink } from "react-router-dom";
-import { useContext } from "react";
-import { ThemeContext } from "../App";
-export function Sidebar({ sidebarOpen, setSidebarOpen }) {
-  const ModSidebaropen = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-  const { setTheme, theme } = useContext(ThemeContext);
-  const CambiarTheme = () => {
-    setTheme((theme) => (theme === "light" ? "dark" : "light"));
-  };
+import React from 'react'
+import logo from "./assets/appacc.jpg";
 
+export const Home = () => {
   return (
-    <Container isOpen={sidebarOpen} themeUse={theme}>
-      <button className="Sidebarbutton" onClick={ModSidebaropen}>
-        <AiOutlineLeft />
-      </button>
-      <div className="Logocontent">
-        <div className="imgcontent">
+    
+    <div className="imgcontent">
           <img src={logo} />
-        </div>
-        <h3>AppAcc</h3>
-      </div>
-      {linksArray.map(({ icon, label, to }) => (
-        <div className="LinkContainer" key={label}>
-          <NavLink
-            to={to}
-            className={({ isActive }) => `Links${isActive ? ` active` : ``}`}
-          >
-            <div className="Linkicon">{icon}</div>
-            {sidebarOpen && <span>{label}</span>}
-          </NavLink>
-        </div>
-      ))}
-      <Divider />
-      {secondarylinksArray.map(({ icon, label, to }) => (
-        <div className="LinkContainer" key={label}>
-          <NavLink
-            to={to}
-            className={({ isActive }) => `Links${isActive ? ` active` : ``}`}
-          >
-            <div className="Linkicon">{icon}</div>
-            {sidebarOpen && <span>{label}</span>}
-          </NavLink>
-        </div>
-      ))}
-      <Divider />
-      <div className="Themecontent">
-        {sidebarOpen && <span className="titletheme">Dark mode</span>}
-        <div className="Togglecontent">
-          <div className="grid theme-container">
-            <div className="content">
-              <div className="demo">
-                <label className="switch" istheme={theme}>
-                  <input
-                    istheme={theme}
-                    type="checkbox"
-                    className="theme-swither"
-                    onClick={CambiarTheme}
-                  ></input>
-                  <span istheme={theme} className="slider round"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Container>
-  );
+    </div>
+  )
 }
-//#region Data links
-const linksArray = [
-  {
-    label: "Home",
-    icon: <AiOutlineHome />,
-    to: "/home",
-  },
-  {
-    label: "Mantenimiento Tablas",
-    icon: <MdConstruction />,
-    to: "/mantenimientotablaspage",
-  },
-  {
-    label: "Comitentes",
-    icon: <MdAccessibility />,
-    to: "/comitenteslista",
-  },
-  {
-    label: "Accionistas",
-    icon: <AiOutlineApartment />,
-    to: "/accionistaslista",
-  },
-  {
-    label: "Cuentas",
-    icon: <MdChecklist />,
-    to: "/accionistaslista",
-  },
-  {
-    label: "Descargas Padrón",
-    icon: <MdAutoAwesomeMotion />,
-    to: "/PadComLista",
-  },
-  {
-    label: "Descargas Padrón XLSX",
-    icon: <MdAutoAwesomeMotion />,
-    to: "/PadronXLSXLista",
-  },
 
-  {
-    label: "Reportes",
-    icon: <MdOutlineAnalytics />,
-    to: "/reportes",
-  },
-];
-const secondarylinksArray = [
-
-  {
-    label: "Logout",
-    icon: <MdLogout />,
-    to: "/",
-  },
-];
-//#endregion
-
-//#region STYLED COMPONENTS
 const Container = styled.div`
   color: ${(props) => props.theme.text};
   background: ${(props) => props.theme.bg};

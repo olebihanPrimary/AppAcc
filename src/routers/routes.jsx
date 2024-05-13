@@ -27,7 +27,7 @@ export function MyRoutes() {
       
   
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/mantenimientotablaspage" element={<MantenimientoTablasPage />} />
         <Route path="/accionistaspage" element={<AccionistasPage />} />
         <Route path="/descargas" element={<Descargas />} />
@@ -45,7 +45,8 @@ export function MyRoutes() {
         <Route path="/padronXLSXForm" element={<PadronXLSXForm />} />
         <Route path="/searchpagepadronXLSX" element={<SearchPagePadronXLSX />} />        
         <Route path="/padcomform" element={<PadComForm />} />        
-        <Route path="/searchpage" element={<SearchPage />} />     
+        <Route path="/searchpage" element={<SearchPage />} />    
+        <Route path="/home" element= {<Home />} /> 
            
 
         
