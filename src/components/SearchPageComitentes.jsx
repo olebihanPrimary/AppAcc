@@ -26,6 +26,7 @@ export const SearchPageComitentes = () => {
     searchText: stringBuscar
   }); 
 
+
   const formInicial = {
     codigoComitente: null,
     codigoDepositante:'',
@@ -40,7 +41,7 @@ export const SearchPageComitentes = () => {
     nombre:'',
     apellidos:'',
     nacionalidadID: 1,
-    telefonoContacto: '',
+    telefonosContacto: '',
     email: '',
     tipoDomicilioID: 1,
     calle: '',

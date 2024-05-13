@@ -26,7 +26,7 @@ const {stringBuscar} = useContext(SearchContext);
   }); 
 
   const formInicial = {
-    NumeroAccionista: null,
+    NumeroAccionista: 'código',
     NumeroDepositanteCVSA: null,
     ALYCLegajo: null,
     CUITLegajo: null,
@@ -43,7 +43,7 @@ const {stringBuscar} = useContext(SearchContext);
     TelefonoLegajo: null,
     LocalidadLegajo: null,
     ProvinciaLegajo: null,
-    PaisLegajo: null
+    PaisLegajos: null
 };
 
   const [data, setData] = useState(formInicial);

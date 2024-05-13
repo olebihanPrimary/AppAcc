@@ -14,14 +14,15 @@ export const AccionistasForm = () => {
         lugarRegPubComercio: '', 
         numeroImpuestoGanancias: '', 
         tipoCuentaID: 1,
-        UsuarioModifica: 'OLB', 
+        usuarioModifica: 'OLB', 
         tipoPersonaID: 1,
         tipoDocumentoID: 1,
         numeroDocumento: '',        
         nombre:'',
         apellidos:'',
         nacionalidadID: 1,
-        telefonoContacto: '',
+        telefonosContacto: '',
+        celularDifusion:'1111',
         email: '',
         tipoDomicilioID: 1,
         calle: '',
@@ -45,8 +46,8 @@ export const AccionistasForm = () => {
 
     const { codigoAccionista, 
         lugarRegPubComercio, numeroImpuestoGanancias, tipoCuentaID,
-        UsuarioModifica, tipoPersonaID, tipoDocumentoID, numeroDocumento, 
-        nombre,apellidos, nacionalidadID, telefonoContacto ,email ,
+        usuarioModifica, tipoPersonaID, tipoDocumentoID, numeroDocumento, 
+        nombre,apellidos, nacionalidadID, telefonosContacto , celularDifusion,email ,
         tipoDomicilioID, calle, numero, piso, departamento, otros, localidadID} = formState;
 
 
@@ -61,11 +62,13 @@ export const AccionistasForm = () => {
         });
     }
 
+    const varUrl = useContext(VarContext);
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const varUrl = useContext(VarContext);
-      
+        console.log(JSON.stringify(formState,2));
+     
         const url = `https://${varUrl}/api/Accionistas`;
       
           fetch(url, {
@@ -275,8 +278,8 @@ export const AccionistasForm = () => {
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="telefono Contacto"
-                        name="telefonoContacto"
-                        value={ telefonoContacto }
+                        name="telefonosContacto"
+                        value={ telefonosContacto }
                         onChange={ onInputChange }
                     />
                 </div>

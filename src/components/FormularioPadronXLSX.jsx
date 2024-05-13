@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { useState } from 'react';
+import { VarContext } from '../App';
 
 export const FormularioPadronXLSX = ({respuesta}) => {
-    console.log('previo al undefine')
+/*     console.log('previo al undefine')
     console.log(JSON.stringify(respuesta))
 
     const {  numeroAccionista, numeroDepositanteCVSA,alycLegajo,cuitLegajo,
@@ -11,11 +13,78 @@ export const FormularioPadronXLSX = ({respuesta}) => {
         paisLegajos} = JSON.stringify(respuesta); 
         /* const {respuesta} = respuesta; */
 
-        console.log("REspuesta "+respuesta.numeroAccionista);
+        //console.log("REspuesta "+respuesta.numeroAccionista); 
+
+        const [formState, setFormState] = useState({respuesta});
+
+        const {  numeroAccionista, numeroDepositanteCVSA,alycLegajo,cuitLegajo,
+            nombreLegajo,tipoPersonaLegajo,categoriaLegajo,categoriaReporteESG,
+            nacionalidadLegajo,grupoLegajo,mail1Legajo,personaContactoAsamblea,
+            mail2Legajo,mail3Legajo,telefonoLegajo,localidadLegajo,provinciaLegajo,
+            paisLegajos} = formState;
+            
+            useEffect(() => {
+            
+                setFormState(respuesta);
+                 
+    
+            }, [respuesta])    
+            
+            const onInputChange = ({ target }) => {
+                const { name, value } = target;
+    
+                 console.log(name);
+                 console.log(value); 
+    
+                setFormState({
+                    ...formState,
+                    [ name ]: value
+                });
+            }         
+             
+            
+            const varUrl = useContext(VarContext);
+            console.log(varUrl);      
+            
+            const handleSubmit = async ( event ) => {
+
+                event.preventDefault();
+        
+          
+                 if ( numeroAccionista == 'Código') {
+        
+                    console.log('No va a API');
+        
+                 }
+                 else {
+                    console.log("Actualizando intentando")
+                   /*  'https://localhost:32768/api/Comitentes/update' */
+                   console.log(JSON.stringify(formState));
+
+                   console.log(varUrl)
+
+                    const resultado = await fetch(`https://${varUrl}/api/PadronXLSX/update`, 
+                    {
+                    method: 'PUT',
+                    headers: {
+                        'accept': 'text/plain',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formState)
+                    });
+                    
+                    const data = await response.json();
+
+                    console.log(data);
+        
+                 }
+              
+                 
+            }
     
   return (
     
-    <div>
+    <form onSubmit={handleSubmit}>
 
             <div className="row">
                 <label className="col-sm-2 col-form-label col-form-label-sm">Número Accionista:</label>
@@ -25,7 +94,8 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                     className="form-control form-control-sm"
                     placeholder="Número Accionista"
                     name="numeroAccionista"
-                    value={ respuesta.numeroAccionista === null ? "Número": respuesta.numeroAccionista }
+                    value={ numeroAccionista === null ? "Número": numeroAccionista }
+                    onChange={ onInputChange }
                 />
                 </div>
             </div>
@@ -34,12 +104,13 @@ export const FormularioPadronXLSX = ({respuesta}) => {
   
                 <label className="col-sm-2 col-form-label col-form-label-sm">Nro Depositante CVSA</label>
                 <div className="col-sm-3">
-                    <input readOnly
+                    <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="Nro Depositante"
                         name="numeroDepositanteCVSA"
-                        value={ respuesta.numeroDepositanteCVSA }
+                        value={ numeroDepositanteCVSA }
+                        onChange={ onInputChange }
 
                     />
 
@@ -49,12 +120,13 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             
                 <label className="col-sm-2 col-form-label col-form-label-sm">CUIT:</label>
                 <div className="col-sm-3">
-                    <input readOnly
+                    <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="CUIT Legajo"
                         name="cuitLegajo"
-                        value={ respuesta.cuitLegajo }
+                        value={ cuitLegajo }
+                        onChange={ onInputChange }
                     
                     />
                 </div>
@@ -65,24 +137,26 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             <div className="row align-items-center"> 
                 <label className="col-sm-2 col-form-label col-form-label-sm">Tipo Persona:</label>
                 <div className="col-sm-3">
-                    <input readOnly
+                    <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="Tipo Persona"
                         name="tipoPersonaLegajo"
-                        value={ respuesta.tipoPersonaLegajo }
+                        value={ tipoPersonaLegajo }
+                        onChange={ onInputChange }
                     
                     />
                 </div>
 
                 <label className="col-sm-2 col-form-label col-form-label-sm">Categoría:</label>
                 <div className="col-sm-3">
-                    <input readOnly
+                    <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="Categoría"
                         name="categoriaLegajo"
-                        value={ respuesta.categoriaLegajo }
+                        value={ categoriaLegajo }
+                        onChange={ onInputChange }
                     
                     />
                 </div>
@@ -93,24 +167,26 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             <div className="row align-items-center"> 
                 <label className="col-sm-2 col-form-label col-form-label-sm">Grupo:</label>
                 <div className="col-sm-3">
-                    <input readOnly
+                    <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="Grupo"
                         name="grupoLegajo"
-                        value={ respuesta.grupoLegajo }
+                        value={ grupoLegajo }
+                        onChange={ onInputChange }
                     />
                 </div>
             </div>        
             <div className="row align-items-center"> 
                 <label className="col-sm-2 col-form-label col-form-label-sm">Tenencia:</label>
                 <div className="col-sm-3">
-                    <input readOnly
+                    <input 
                         type="text" 
                         className="form-control form-control-sm mt-2 bg-info"
                         placeholder="Tenencia"
                         name="tenencia"
                         value={ parseFloat('0').toFixed(2) }
+                        onChange={ onInputChange }
                     
                     />
                 </div>
@@ -120,12 +196,13 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             <div className="row align-items-center">
                 <label className="col-sm-2 col-form-label col-form-label-sm">Nombre Cuenta:</label>
                 <div className="col-sm-7">
-                    <input readOnly
+                    <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="Nombre Cuenta"
                         name="nombreLegajo"
-                        value={ respuesta.nombreLegajo }
+                        value={ nombreLegajo }
+                        onChange={ onInputChange }
                     
                     />
                 </div>
@@ -133,12 +210,13 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             <div className="row align-items-center">
                 <label className="col-sm-2 col-form-label col-form-label-sm">Contacto Asamblea:</label>
                 <div className="col-sm-8">
-                    <input readOnly
+                    <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="Contacto Asamblea"
                         name="personaContactoAsamblea"
-                        value={ respuesta.personaContactoAsamblea }
+                        value={ personaContactoAsamblea }
+                        onChange={ onInputChange }
                     />
                 </div>
             </div>        
@@ -157,12 +235,13 @@ export const FormularioPadronXLSX = ({respuesta}) => {
 
                     </select>  */}                   
 
-                    <input readOnly
+                    <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="Mail 1"
                         name="mail1Legajo"
-                        value={ respuesta.mail1Legajo === null ? '-': respuesta.mail1Legajo}
+                        value={ mail1Legajo }
+                        onChange={ onInputChange }
                        
                     /> 
                 </div>
@@ -171,12 +250,13 @@ export const FormularioPadronXLSX = ({respuesta}) => {
 
                 <label className="col-sm-2 col-form-label col-form-label-sm">Mail 2:</label>
                 <div className="col-sm-8">                          
-                    <input readOnly
+                    <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="Mail 2"
                         name="mail2Legajo"
-                        value={ respuesta.mail2Legajo }
+                        value={ mail2Legajo }
+                        onChange={ onInputChange }
                     />
                 </div>
 
@@ -186,12 +266,13 @@ export const FormularioPadronXLSX = ({respuesta}) => {
 
             <label className="col-sm-2 col-form-label col-form-label-sm">Mail 3:</label>
             <div className="col-sm-8">                          
-                <input readOnly
+                <input 
                     type="text" 
                     className="form-control form-control-sm mt-2"
                     placeholder="Mail 3"
                     name="mail3Legajo"
-                    value={ respuesta.mail3Legajo }
+                    value={ mail3Legajo }
+                    onChange={ onInputChange }
                 />
             </div>
 
@@ -203,12 +284,13 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             <div className="row align-items-center">
                 <label className="col-sm-2 col-form-label col-form-label-sm">Teléfono:</label>
                 <div className="col-sm-8">                                 
-                    <input readOnly
+                    <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="teléfono"
                         name="telefonoLegajo"
-                        value={ respuesta.telefonoLegajo === null ? 'S/T' : respuesta.telefonoLegajo }
+                        value={ telefonoLegajo === null ? 'S/T' : respuesta.telefonoLegajo }
+                        onChange={ onInputChange }
                     />
                 </div>
             </div>
@@ -217,24 +299,26 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             <div className="row align-items-center"> 
                 <label className="col-sm-2 col-form-label col-form-label-sm">Pais</label>
                 <div className="col-sm-2">
-                    <input readOnly
+                    <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="pais"
-                        name="paisLegajo"
-                        value={ respuesta.paisLegajos }
+                        name="paisLegajos"
+                        value={ paisLegajos }
+                        onChange={ onInputChange }
                     />
                 </div>
             </div>         
             <div className="row align-items-center">
                 <label className="col-sm-2 col-form-label col-form-label-sm">Provincia:</label>
                 <div className="col-sm-8">
-                    <input readOnly
+                    <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="provincia"
                         name="provincia"
-                        value={ respuesta.provinciaLegajo }
+                        value={ provinciaLegajo }
+                        onChange={ onInputChange }
                     />
                 </div>
     {/*             <label className="col-sm-2 col-form-label col-form-label-sm">cod.Postal:</label>
@@ -253,12 +337,13 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             <div className="row align-items-center"> 
                 <label className="col-sm-2 col-form-label col-form-label-sm">Localidad</label>
                 <div className="col-sm-6">
-                    <input readOnly
+                    <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="localidad"
-                        name="loscalidadLegajo"
-                        value={ respuesta.localidadLegajo }
+                        name="localidadLegajo"
+                        value={ localidadLegajo }
+                        onChange={ onInputChange }
                     />
                 </div>
 
@@ -283,6 +368,6 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             </div> 
 
 
-    </div>
+    </form>
   )
 }

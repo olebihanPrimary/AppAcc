@@ -17,14 +17,14 @@ export const ComitentesForm = () => {
         numeroCondominio: '',
         lugarRegPubComercio: '', 
         numeroImpuestoGanancias: '', 
-        UsuarioModifica: 'OLB', 
+        usuarioModifica: 'OLB', 
         tipoPersonaID: 1,
         tipoDocumentoID: 1,
         numeroDocumento: '',        
         nombre:'',
         apellidos:'',
         nacionalidadID: 1,
-        telefonoContacto: '',
+        telefonosContacto: '',
         email: '',
         tipoDomicilioID: 1,
         calle: '',
@@ -49,10 +49,10 @@ export const ComitentesForm = () => {
 
 
     const { codigoComitente, codigoDepositante, tipoComitenteID, numeroCondominio,
-            lugarRegPubComercio, numeroImpuestoGanancias, UsuarioModifica, 
-            tipoPersonaID, tipoDocumentoID, numeroDocumento, 
-            nombre,apellidos, nacionalidadID, telefonoContacto ,email ,
-            tipoDomicilioID, calle, numero, piso, departamento, otros, localidadID} = formState;
+        lugarRegPubComercio, numeroImpuestoGanancias, usuarioModifica, 
+        tipoPersonaID, tipoDocumentoID, numeroDocumento, 
+        nombre,apellidos, nacionalidadID, telefonosContacto ,email ,
+        tipoDomicilioID, calle, numero, piso, departamento, otros, localidadID} = formState;
 
     const onInputChange = ({ target }) => {
         const { name, value } = target;
@@ -64,11 +64,12 @@ export const ComitentesForm = () => {
         });
     }
 
+    const varUrl = useContext(VarContext);
+
     const handleSubmit = (event) => {
         event.preventDefault();
       
-        const varUrl = useContext(VarContext);
-      
+        console.log(JSON.stringify(formState,2));
         const url = `https://${varUrl}/api/Comitentes`;
       
           fetch(url, {
@@ -142,7 +143,8 @@ export const ComitentesForm = () => {
                         value={ tipoComitenteID }
                         onChange={ onInputChange }
                     /> */}
-                    <select className="form-select form-select-sm mt-2" name="tipoComitenteID" id="TipoComitenteIDSelect"
+                    <select className="form-select form-select-sm mt-2"
+                     name="tipoComitenteID" id="TipoComitenteIDSelect"
                         onChange={ onInputChange } defaultValue={"DEFAULT"}
                     >
                         <option value="DEFAULT" disabled>Seleccione Opción</option>
@@ -306,8 +308,8 @@ export const ComitentesForm = () => {
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="telefono Contacto"
-                        name="telefonoContacto"
-                        value={ telefonoContacto }
+                        name="telefonosContacto"
+                        value={ telefonosContacto }
                         onChange={ onInputChange }
                     />
                 </div>
