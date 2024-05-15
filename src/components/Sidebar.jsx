@@ -111,7 +111,7 @@ const linksArray = [
     to: "/PadComLista",
   },
   {
-    label: "Descargas Padrón XLSX",
+    label: "Padrón Permanente",
     icon: <MdAutoAwesomeMotion />,
     to: "/PadronXLSXLista",
   },

@@ -107,15 +107,15 @@ export const PadronXLSXLista = () => {
             </div>            
 
 
-            <h4 className="mt-3">Padrón Descargas</h4> 
+            <h4 className="mt-3">Padrón Permanente</h4> 
             <hr />
  
             <table className="Container ms-3">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th className="px-2" scope="col">Número Accionista</th>
-                    <th className="px-2" scope="col">Número Depositante</th>                  
+{/*                     <th className="px-2" scope="col">Número Accionista</th>
+                    <th className="px-2" scope="col">Número Depositante</th> */}                  
                     <th className="px-2" scope="col">Cuit Legajo</th>                  
                     <th className="px-2" scope="col">Nombre Legajo</th>
                     <th className="px-2" scope="col">Categoria Legajo</th>
@@ -127,11 +127,11 @@ export const PadronXLSXLista = () => {
                       <tr key={index} className={index % 2 === 0 ? "bg-color" : ''}>
                         <th scope="row" >{index + 1}</th>
                         
-                        <td className="numeroAccionista" onClick={() => ActStringBuscar(item.numeroAccionista)}>{item.numeroAccionista}</td>
-                        <td>{item.numeroDepositanteCVSA}</td>
-                        <td>{item.cuitLegajo}</td>
-                        <td>{item.nombreLegajo}</td>
-                        <td>{item.categoriaLegajo}</td>
+{/*                         <td className="numeroAccionista" onClick={() => ActStringBuscar(item.numeroAccionista)}>{item.numeroAccionista}</td>
+                        <td>{item.numeroDepositanteCVSA}</td> */}
+                        <td className="cuitLegajo px-2" onClick={() => ActStringBuscar(item.cuitLegajo)}>{item.cuitLegajo}</td>
+                        <td className="px-2">{item.nombreLegajo}</td>
+                        <td className="px-2">{item.categoriaLegajo}</td>
                         <td className="text-end">{parseFloat(item.tenencia).toFixed(2)}</td>
                       </tr>
                     ))}
@@ -176,7 +176,7 @@ const Container =styled.div`
   padding: 1rem;
 }
 
-.numeroAccionista:hover {
+.cuitLegajo:hover {
   background-color: #7FFFD4; /* Cambia el color de fondo al pasar el mouse por encima */
   cursor: pointer;
 }

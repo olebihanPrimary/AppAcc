@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { SearchContext } from "../context/SearchContext";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../hooks/useForm";
+import {FileUpload} from "./FileUpLoad";
 
 
 export const PadComLista = () => {
@@ -101,8 +102,8 @@ export const PadComLista = () => {
                 </form>
               </div>
               </div>
-            
-
+            <hr />
+            <FileUpload />
 
             <h4 className="mt-3">Padrón Descargas</h4> 
             <hr />

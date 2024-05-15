@@ -33,8 +33,8 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             const onInputChange = ({ target }) => {
                 const { name, value } = target;
     
-                 console.log(name);
-                 console.log(value); 
+/*                  console.log(name);
+                 console.log(value);  */
     
                 setFormState({
                     ...formState,
@@ -302,7 +302,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                     <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
-                        placeholder="pais"
+                        placeholder="paisLegajos"
                         name="paisLegajos"
                         value={ paisLegajos }
                         onChange={ onInputChange }

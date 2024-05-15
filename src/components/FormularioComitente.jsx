@@ -49,7 +49,13 @@ export const FormularioComitente = ({respuesta}) => {
             nombre,apellidos, nacionalidadID, telefonosContacto ,email ,
             tipoDomicilioID, calle, numero, piso, departamento, otros, localidadID} = formState;  
 
-            
+        const [selectedValue, setSelectedValue] = useState("");
+
+        useEffect(() => {
+            // Supongamos que "valorRecibido" es el valor que recibes
+            const valorRecibido = tipoPersonaID;
+            setSelectedValue(valorRecibido);
+          }, [tipoPersonaID]);
             
             useEffect(() => {
             
@@ -208,7 +214,26 @@ export const FormularioComitente = ({respuesta}) => {
             <div className="row align-items-center"> 
                 <label className="col-sm-2 col-form-label col-form-label-sm">Tipo de persona:</label>
                 <div className="col-sm-3">
-                    <input   
+
+{/*                  <select className="form-select mt-2" name="tipoPersonaID" id="tipoPersonaID"
+                         onChanged={onInputChange} defaultValue={"DEFAULT"}
+                    >
+                        <option value="DEFAULT">Selecciona una opción</option>
+                        <option value={ '1' }>FISICA</option>
+                        <option value={ '2' }>JURIDICA</option>
+                        <option value={ '3' }>OTROS</option>
+
+                    </select>  */} 
+
+                    <select value={selectedValue} name="tipoPersonaID"
+                        onChange={e => setSelectedValue(e.target.value)}>
+                        <option value={1}>FISICA</option>
+                        <option value={2}>JURIDICA</option>
+                        <option value={3}>OTROS</option>
+                    </select>
+
+
+{/*                      <input   
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="Tipo Persona ID"
@@ -216,7 +241,8 @@ export const FormularioComitente = ({respuesta}) => {
                         value={  tipoPersonaID }
                         onChange={ onInputChange }
                     
-                    />
+                    />  */}
+
                 </div>
             </div>                                       
 
@@ -253,7 +279,7 @@ export const FormularioComitente = ({respuesta}) => {
                 <label className="col-sm-2 col-form-label col-form-label-sm">Tipo Documento:</label>
                 <div className="col-sm-3">
 
-{/*                     <select className="form-select mt-2" name="tipoDocumentoID" id="exampleSelect"
+{/*                 <select className="form-select mt-2" name="tipoDocumentoID" id="exampleSelect"
                          defaultValue={"DEFAULT"}
                     >
                         <option value={"DEFAULT"}>Selecciona una opción</option>

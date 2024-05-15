@@ -43,7 +43,7 @@ const {stringBuscar} = useContext(SearchContext);
     TelefonoLegajo: null,
     LocalidadLegajo: null,
     ProvinciaLegajo: null,
-    PaisLegajos: null
+    paisLegajo: null
 };
 
   const [data, setData] = useState(formInicial);
