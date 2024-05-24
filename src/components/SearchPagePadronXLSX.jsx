@@ -65,7 +65,7 @@ const {stringBuscar} = useContext(SearchContext);
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-     fetch(`https://${url}/api/PadronXLSX/numeroaccionista/${searchText}`)
+     fetch(`https://${url}/api/PadronXLSX/cuitlegajo/${searchText}`)
       .then(response => response.json())
       .then(data => {
         if (data === null) {
@@ -92,7 +92,7 @@ const {stringBuscar} = useContext(SearchContext);
       <div className="row">
 
           <div className="col-5">
-            <h4>Buscar Registro Padrón XLSX</h4>
+            <h4>Buscar Registro Padrón Permanente</h4>
             <hr />
             <form onSubmit={ handleSubmit } className='d-flex'>
               <input 

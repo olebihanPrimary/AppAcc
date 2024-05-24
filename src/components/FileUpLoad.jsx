@@ -35,6 +35,9 @@ export const FileUpload = () =>
       // Verificar si la solicitud fue exitosa
       if (respuesta.ok) {
         console.log('Archivo subido con éxito');
+
+        //disparo la actualización del lote
+
       } else {
         console.log('Error al subir el archivo');
       }

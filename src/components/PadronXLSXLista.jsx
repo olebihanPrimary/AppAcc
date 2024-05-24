@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Message } from "./Messaje";
 import { PadComNavBar } from "./PadComNavBar";
 import { useFetch } from "../hooks/useFetch";
@@ -9,12 +9,22 @@ import { ComitenteCard } from "./ComitenteCard";
 import {  VarContext } from "../App";
 import { useContext } from "react";
 
+import { HotTable, HotColumn, HotTableClass } from "@handsontable/react";
+import { registerAllModules } from "handsontable/registry";
+import { registerLanguageDictionary, esMX } from "handsontable/i18n";
+import "handsontable/dist/handsontable.full.css";
+
+// ejecutar para obtener todas las funciones de handsontable
+registerAllModules();
+registerLanguageDictionary(esMX);
+
 
 import { PadronXLSXNavBar } from "./PadronXLSXNavBar";
 import { Link, NavLink} from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { SearchContext } from "../context/SearchContext";
 import { useForm } from "../hooks/useForm";
+import { current } from "@reduxjs/toolkit";
 
 export const PadronXLSXLista = () => {
 
@@ -26,9 +36,14 @@ export const PadronXLSXLista = () => {
   
     const [data, setData] = useState([]);  
 
+    
     const url = useContext(VarContext);
     
-    
+    const hotTableComponent = useRef(null);
+
+
+  
+
     const [endPoint, setEndPoint ] = useState(`https://${url}/api/PadronXLSX`)
 
     const navigate = useNavigate();
@@ -51,9 +66,29 @@ export const PadronXLSXLista = () => {
       
       }    
 
-    const ActStringBuscar = (valor) => {
+      const handleClick = (event, coords, td) => {
+        console.log('handleclick')
+        console.log(coords.col)
+        if (coords && coords.col === 0) { // Cambia el índice de la columna según sea necesario
+          //alert(`Clic en la ${coords.col}, fila ${coords.row}`);
+          const valor = hotTableComponent.current.hotInstance.getDataAtCell( coords.row, coords.col);
+          console.log(valor);
+          setStringBuscar( valor );
+          navigate('../searchPagePadronXLSX');
+        }
+
+      };
+    
+      const afterOnCellMouseDown = (event, coords, td) => {
+        console.log('afteroncellmousedown')
+        handleClick(event, coords, td);
+      };
+
+    const ActStringBuscar = (event, coords  ) => {
 
         console.log('String Buscar ' +stringBuscar)
+        const valor = hotTableComponent.current.hotInstance.getDataAtCell( coords.row, coords.col);
+        console.log(valor)
         setStringBuscar(valor);
 
         navigate('../searchPagePadronXLSX');
@@ -74,15 +109,19 @@ export const PadronXLSXLista = () => {
           
       }, [endPoint]); 
 
+      const hotSettings = {
+         afterOnCellMouseDown: afterOnCellMouseDown,
+      };
+
 /*       console.log(data) */
   
     return (
         
         <Container>
             
-            <PadronXLSXNavBar/>
+        <PadronXLSXNavBar/>
 
-            <div className="row ms-2">
+        <div className="row ms-2">
 
             <div className="col-5">
             {/*  <h4>Búsqueda por cuenta</h4> */}
@@ -109,13 +148,32 @@ export const PadronXLSXLista = () => {
 
             <h4 className="mt-3">Padrón Permanente</h4> 
             <hr />
+            <HotTable
+              ref={hotTableComponent}
+              settings={hotSettings}
+              language={esMX.languageCode}
+              data={data}
+              licenseKey="non-commercial-and-evaluation"
+              colHeaders={true}
+              rowHeaders={true}
+              columnSorting={true}
+              mergeCells={true}
+              contextMenu={["row_above", "row_below"]}
+              readOnly={false}
+              
+            >
+            <HotColumn  className="cuitLegajo" data="cuitLegajo" title="CUIT"
+               />
+              <HotColumn data="categoriaLegajo" title="Categoria" />
+              <HotColumn data="nombreLegajo" title="Nombre"/>
+              <HotColumn data="tenencia" title="Tenencia" />
+              </HotTable>
  
-            <table className="Container ms-3">
+ {/*            <table className="Container ms-3">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-{/*                     <th className="px-2" scope="col">Número Accionista</th>
-                    <th className="px-2" scope="col">Número Depositante</th> */}                  
+                  
                     <th className="px-2" scope="col">Cuit Legajo</th>                  
                     <th className="px-2" scope="col">Nombre Legajo</th>
                     <th className="px-2" scope="col">Categoria Legajo</th>
@@ -127,8 +185,7 @@ export const PadronXLSXLista = () => {
                       <tr key={index} className={index % 2 === 0 ? "bg-color" : ''}>
                         <th scope="row" >{index + 1}</th>
                         
-{/*                         <td className="numeroAccionista" onClick={() => ActStringBuscar(item.numeroAccionista)}>{item.numeroAccionista}</td>
-                        <td>{item.numeroDepositanteCVSA}</td> */}
+
                         <td className="cuitLegajo px-2" onClick={() => ActStringBuscar(item.cuitLegajo)}>{item.cuitLegajo}</td>
                         <td className="px-2">{item.nombreLegajo}</td>
                         <td className="px-2">{item.categoriaLegajo}</td>
@@ -137,7 +194,7 @@ export const PadronXLSXLista = () => {
                     ))}
                 </tbody>
 
-            </table>
+            </table> */}
            
 
              

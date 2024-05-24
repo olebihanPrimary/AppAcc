@@ -101,20 +101,21 @@ const linksArray = [
     to: "/accionistaslista",
   },
   {
-    label: "Cuentas",
+    label: "Padrón Permanente",
+    icon: <MdAutoAwesomeMotion />,
+    to: "/PadronXLSXLista",
+  },
+  {
+    label: "Movimientos",
     icon: <MdChecklist />,
-    to: "/accionistaslista",
+    to: "/home",
   },
   {
     label: "Descargas Padrón",
     icon: <MdAutoAwesomeMotion />,
     to: "/PadComLista",
   },
-  {
-    label: "Padrón Permanente",
-    icon: <MdAutoAwesomeMotion />,
-    to: "/PadronXLSXLista",
-  },
+
 
   {
     label: "Reportes",

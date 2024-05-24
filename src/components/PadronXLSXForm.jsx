@@ -106,7 +106,7 @@ export const PadronXLSXForm = () => {
         <>
 
        
-            <h3 className="mt-3">Formulario Padrón Xlsx</h3> 
+            <h3 className="mt-3">Formulario Padrón Permanente</h3> 
             <div className="alert alert-warning"> Formulario en construcción </div>
             <hr />
             

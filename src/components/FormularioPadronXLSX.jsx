@@ -21,7 +21,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             nombreLegajo,tipoPersonaLegajo,categoriaLegajo,categoriaReporteESG,
             nacionalidadLegajo,grupoLegajo,mail1Legajo,personaContactoAsamblea,
             mail2Legajo,mail3Legajo,telefonoLegajo,localidadLegajo,provinciaLegajo,
-            paisLegajos} = formState;
+            paisLegajos, tenencia} = formState;
             
             useEffect(() => {
             
@@ -185,7 +185,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2 bg-info"
                         placeholder="Tenencia"
                         name="tenencia"
-                        value={ parseFloat('0').toFixed(2) }
+                        value={ tenencia }
                         onChange={ onInputChange }
                     
                     />
