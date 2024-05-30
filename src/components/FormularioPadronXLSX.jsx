@@ -19,14 +19,16 @@ export const FormularioPadronXLSX = ({respuesta}) => {
 
         const {  numeroAccionista, numeroDepositanteCVSA,alycLegajo,cuitLegajo,
             nombreLegajo,tipoPersonaLegajo,categoriaLegajo,categoriaReporteESG,
-            nacionalidadLegajo,grupoLegajo,mail1Legajo,personaContactoAsamblea,
+            nacionalidadLegajo,grupoLegajo ,mail1Legajo ,personaContactoAsamblea,
             mail2Legajo,mail3Legajo,telefonoLegajo,localidadLegajo,provinciaLegajo,
             paisLegajos, tenencia} = formState;
+
+            console.log(respuesta);
             
             useEffect(() => {
             
                 setFormState(respuesta);
-                 
+                /*  */
     
             }, [respuesta])    
             
@@ -73,9 +75,10 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                     body: JSON.stringify(formState)
                     });
                     
-                    const data = await response.json();
+                    const data =  response.json();
 
                     console.log(data);
+                    console.log('Subido');
         
                  }
               
@@ -94,7 +97,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                     className="form-control form-control-sm"
                     placeholder="Número Accionista"
                     name="numeroAccionista"
-                    value={ numeroAccionista === null ? "Número": numeroAccionista }
+                    value={ numeroAccionista !== null ?  numeroAccionista : '-'}
                     onChange={ onInputChange }
                 />
                 </div>
@@ -109,7 +112,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Nro Depositante"
                         name="numeroDepositanteCVSA"
-                        value={ numeroDepositanteCVSA }
+                        value={ numeroDepositanteCVSA !== null ? numeroDepositanteCVSA : '-' }
                         onChange={ onInputChange }
 
                     />
@@ -142,7 +145,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Tipo Persona"
                         name="tipoPersonaLegajo"
-                        value={ tipoPersonaLegajo }
+                        value={ tipoPersonaLegajo  !== null ? tipoPersonaLegajo : '-'}
                         onChange={ onInputChange }
                     
                     />
@@ -155,7 +158,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Categoría"
                         name="categoriaLegajo"
-                        value={ categoriaLegajo }
+                        value={ categoriaLegajo !== null ? categoriaLegajo : '-' }
                         onChange={ onInputChange }
                     
                     />
@@ -172,7 +175,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Grupo"
                         name="grupoLegajo"
-                        value={ grupoLegajo }
+                        value={ grupoLegajo !== null ? grupoLegajo : '-' }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -215,7 +218,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Contacto Asamblea"
                         name="personaContactoAsamblea"
-                        value={ personaContactoAsamblea }
+                        value={ personaContactoAsamblea !== null ? personaContactoAsamblea : '-' }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -240,7 +243,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Mail 1"
                         name="mail1Legajo"
-                        value={ mail1Legajo }
+                        value={ mail1Legajo !== null ? mail1Legajo : '-'}
                         onChange={ onInputChange }
                        
                     /> 
@@ -255,7 +258,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Mail 2"
                         name="mail2Legajo"
-                        value={ mail2Legajo }
+                        value={ mail2Legajo !== null ? mail2Legajo : '-' }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -271,7 +274,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                     className="form-control form-control-sm mt-2"
                     placeholder="Mail 3"
                     name="mail3Legajo"
-                    value={ mail3Legajo }
+                    value={ mail3Legajo !== null ? mail3Legajo : '-'}
                     onChange={ onInputChange }
                 />
             </div>
@@ -289,7 +292,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="teléfono"
                         name="telefonoLegajo"
-                        value={ telefonoLegajo === null ? 'S/T' : respuesta.telefonoLegajo }
+                        value={ telefonoLegajo !== null ? telefonoLegajo : '-' }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -304,7 +307,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="paisLegajos"
                         name="paisLegajos"
-                        value={ paisLegajos }
+                        value={ paisLegajos !== null ? paisLegajos : '-'}
                         onChange={ onInputChange }
                     />
                 </div>
@@ -317,7 +320,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="provincia"
                         name="provincia"
-                        value={ provinciaLegajo }
+                        value={ provinciaLegajo !== null ? provinciaLegajo : '-' }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -342,7 +345,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="localidad"
                         name="localidadLegajo"
-                        value={ localidadLegajo }
+                        value={ localidadLegajo !== null ? localidadLegajo : '-'}
                         onChange={ onInputChange }
                     />
                 </div>

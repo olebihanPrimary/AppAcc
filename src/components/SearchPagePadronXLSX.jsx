@@ -71,6 +71,7 @@ const {stringBuscar} = useContext(SearchContext);
         if (data === null) {
           console.error('Los datos recibidos son nulos');
         } else {
+          console.log(data);
           setData(data);
           setMostrar(data);
         }

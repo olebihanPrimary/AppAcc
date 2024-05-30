@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useEffect, useRef, useState } from 'react';
-import { Message } from "./Messaje";
+/* import { Message } from "./Messaje";
 import { PadComNavBar } from "./PadComNavBar";
 import { useFetch } from "../hooks/useFetch";
 import { LoadingMessage } from "./LoadingMessage";
-import { ComitenteCard } from "./ComitenteCard";
+import { ComitenteCard } from "./ComitenteCard"; */
 
 import {  VarContext } from "../App";
 import { useContext } from "react";
@@ -26,7 +26,7 @@ import { SearchContext } from "../context/SearchContext";
 import { useForm } from "../hooks/useForm";
 import { current } from "@reduxjs/toolkit";
 
-export const PadronXLSXLista = () => {
+export const  PadronXLSXLista =  () => {
 
     const { stringBuscar, setStringBuscar} = useContext(SearchContext);
     const { searchText, onInputChange } = useForm({
@@ -38,6 +38,8 @@ export const PadronXLSXLista = () => {
 
     
     const url = useContext(VarContext);
+
+    const [resultado, setResultado] = useState('');
     
     const hotTableComponent = useRef(null);
 
@@ -69,9 +71,11 @@ export const PadronXLSXLista = () => {
       const handleClick = (event, coords, td) => {
         console.log('handleclick')
         console.log(coords.col)
-        if (coords && coords.col === 0) { // Cambia el índice de la columna según sea necesario
+        if (coords && coords.col === 0 && coords.row >= 0) { // Cambia el índice de la columna según sea necesario
           //alert(`Clic en la ${coords.col}, fila ${coords.row}`);
           const valor = hotTableComponent.current.hotInstance.getDataAtCell( coords.row, coords.col);
+          console.log(coords.row)
+          console.log(coords.col)
           console.log(valor);
           setStringBuscar( valor );
           navigate('../searchPagePadronXLSX');
@@ -88,6 +92,8 @@ export const PadronXLSXLista = () => {
 
         console.log('String Buscar ' +stringBuscar)
         const valor = hotTableComponent.current.hotInstance.getDataAtCell( coords.row, coords.col);
+        console.log(coords.row)
+        console.log(coords.col)
         console.log(valor)
         setStringBuscar(valor);
 
@@ -98,15 +104,24 @@ export const PadronXLSXLista = () => {
     /* const {data, isLoading} = useFetch ( 'https://localhost:32768/api/Comitentes/consultapersonas' ); */
 
 
-     useEffect(() => {
-        
+    
+      useEffect(() => {
+       
+         setResultado('Cargando Padrón...'); 
+
          fetch(endPoint)
           .then(response => response.json())
-          .then(data => setData(data))
+          .then(data => {
+            setData(data);
+            setResultado(''); })
           .catch(error => console.error(error)); 
-        
+
+        return () => {
+          console.log('Función de limpieza ejecutada');
+        };
         //const {data, isLoading, hasError} = useFetch(`https://${url}/api/PadronXLSX`)
-          
+
+                
       }, [endPoint]); 
 
       const hotSettings = {
@@ -141,12 +156,15 @@ export const PadronXLSXLista = () => {
                   Buscar
                 </button>
 
+
+
               </form>
             </div>
             </div>            
 
 
             <h4 className="mt-3">Padrón Permanente</h4> 
+            <p className="text-success ms-2">{ resultado }</p>
             <hr />
             <HotTable
               ref={hotTableComponent}
@@ -160,13 +178,15 @@ export const PadronXLSXLista = () => {
               mergeCells={true}
               contextMenu={["row_above", "row_below"]}
               readOnly={false}
+              colWidths={[100,100,300,100,70]}
               
             >
             <HotColumn  className="cuitLegajo" data="cuitLegajo" title="CUIT"
                />
               <HotColumn data="categoriaLegajo" title="Categoria" />
               <HotColumn data="nombreLegajo" title="Nombre"/>
-              <HotColumn data="tenencia" title="Tenencia" />
+              <HotColumn className={'htRight'} data="tenencia" title="Tenencia" />
+              <HotColumn className={'htCenter'} data="estado" title="Estado" />
               </HotTable>
  
  {/*            <table className="Container ms-3">
