@@ -43,7 +43,7 @@ const {stringBuscar} = useContext(SearchContext);
     TelefonoLegajo: null,
     LocalidadLegajo: null,
     ProvinciaLegajo: null,
-    paisLegajo: null
+    PaisLegajo: null
 };
 
   const [data, setData] = useState(formInicial);
@@ -170,7 +170,7 @@ const {stringBuscar} = useContext(SearchContext);
   )
 }
 const Container =styled.div`
-   height:150vh;
+   height:180vh;
    margin:20px;
    .container-lista{
     font-size: 14px;

@@ -21,7 +21,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             nombreLegajo,tipoPersonaLegajo,categoriaLegajo,categoriaReporteESG,
             nacionalidadLegajo,grupoLegajo ,mail1Legajo ,personaContactoAsamblea,
             mail2Legajo,mail3Legajo,telefonoLegajo,localidadLegajo,provinciaLegajo,
-            paisLegajos, tenencia} = formState;
+            paisLegajo, tenencia} = formState;
 
             console.log(respuesta);
             
@@ -48,7 +48,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             const varUrl = useContext(VarContext);
             console.log(varUrl);      
             
-            const handleSubmit = async ( event ) => {
+            const handleSubmit = ( event ) => {
 
                 event.preventDefault();
         
@@ -65,7 +65,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
 
                    console.log(varUrl)
 
-                    const resultado = await fetch(`https://${varUrl}/api/PadronXLSX/update`, 
+                    const resultado = fetch(`https://${varUrl}/api/PadronXLSX/update`, 
                     {
                     method: 'PUT',
                     headers: {
@@ -307,7 +307,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="paisLegajos"
                         name="paisLegajos"
-                        value={ paisLegajos !== null ? paisLegajos : '-'}
+                        value={ paisLegajo !== null ? paisLegajo : '-'}
                         onChange={ onInputChange }
                     />
                 </div>
