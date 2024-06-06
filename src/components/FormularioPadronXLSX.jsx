@@ -19,8 +19,8 @@ export const FormularioPadronXLSX = ({respuesta}) => {
 
         const {  numeroAccionista, numeroDepositanteCVSA,alycLegajo,cuitLegajo,
             nombreLegajo,tipoPersonaLegajo,categoriaLegajo,categoriaReporteESG,
-            nacionalidadLegajo,grupoLegajo ,mail1Legajo ,personaContactoAsamblea,
-            mail2Legajo,mail3Legajo,telefonoLegajo,localidadLegajo,provinciaLegajo,
+            nacionalidadLegajo,grupoLegajo , personaContactoLegajo, mail1Legajo ,personaContactoAsamblea,
+            mail2Legajo,mail3Legajo,telefonoLegajo, domicilioLegajo, localidadLegajo,provinciaLegajo,
             paisLegajo, tenencia} = formState;
 
             console.log(respuesta);
@@ -145,7 +145,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Tipo Persona"
                         name="tipoPersonaLegajo"
-                        value={ tipoPersonaLegajo  !== null ? tipoPersonaLegajo : '-'}
+                        value={ tipoPersonaLegajo }
                         onChange={ onInputChange }
                     
                     />
@@ -158,7 +158,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Categoría"
                         name="categoriaLegajo"
-                        value={ categoriaLegajo !== null ? categoriaLegajo : '-' }
+                        value={ categoriaLegajo  }
                         onChange={ onInputChange }
                     
                     />
@@ -175,7 +175,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Grupo"
                         name="grupoLegajo"
-                        value={ grupoLegajo !== null ? grupoLegajo : '-' }
+                        value={ grupoLegajo  }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -218,7 +218,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Contacto Asamblea"
                         name="personaContactoAsamblea"
-                        value={ personaContactoAsamblea !== null ? personaContactoAsamblea : '-' }
+                        value={ personaContactoAsamblea }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -243,7 +243,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Mail 1"
                         name="mail1Legajo"
-                        value={ mail1Legajo !== null ? mail1Legajo : '-'}
+                        value={ mail1Legajo }
                         onChange={ onInputChange }
                        
                     /> 
@@ -258,7 +258,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="Mail 2"
                         name="mail2Legajo"
-                        value={ mail2Legajo !== null ? mail2Legajo : '-' }
+                        value={ mail2Legajo  }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -274,7 +274,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                     className="form-control form-control-sm mt-2"
                     placeholder="Mail 3"
                     name="mail3Legajo"
-                    value={ mail3Legajo !== null ? mail3Legajo : '-'}
+                    value={ mail3Legajo }
                     onChange={ onInputChange }
                 />
             </div>
@@ -292,12 +292,24 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="teléfono"
                         name="telefonoLegajo"
-                        value={ telefonoLegajo !== null ? telefonoLegajo : '-' }
+                        value={ telefonoLegajo  }
                         onChange={ onInputChange }
                     />
                 </div>
             </div>
-
+            <div className="row align-items-center">
+                <label className="col-sm-2 col-form-label col-form-label-sm">Domicilio:</label>
+                <div className="col-sm-8">                                 
+                    <input 
+                        type="text" 
+                        className="form-control form-control-sm mt-2"
+                        placeholder="Domicilio"
+                        name="domicilioLegajo"
+                        value={ domicilioLegajo  }
+                        onChange={ onInputChange }
+                    />
+                </div>
+            </div>
 
             <div className="row align-items-center"> 
                 <label className="col-sm-2 col-form-label col-form-label-sm">Pais</label>
@@ -305,9 +317,9 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                     <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
-                        placeholder="paisLegajos"
-                        name="paisLegajos"
-                        value={ paisLegajo !== null ? paisLegajo : '-'}
+                        placeholder="paisLegajo"
+                        name="paisLegajo"
+                        value={ paisLegajo }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -319,8 +331,8 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         type="text" 
                         className="form-control form-control-sm mt-2"
                         placeholder="provincia"
-                        name="provincia"
-                        value={ provinciaLegajo !== null ? provinciaLegajo : '-' }
+                        name="provinciaLegajo"
+                        value={ provinciaLegajo  }
                         onChange={ onInputChange }
                     />
                 </div>
@@ -345,7 +357,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         className="form-control form-control-sm mt-2"
                         placeholder="localidad"
                         name="localidadLegajo"
-                        value={ localidadLegajo !== null ? localidadLegajo : '-'}
+                        value={ localidadLegajo }
                         onChange={ onInputChange }
                     />
                 </div>

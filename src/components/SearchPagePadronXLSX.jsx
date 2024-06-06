@@ -21,6 +21,9 @@ export const SearchPagePadronXLSX = () => {
 
 const {stringBuscar} = useContext(SearchContext);
 
+window.scrollTo(0, 0);
+
+
   const { searchText, onInputChange } = useForm({
     searchText: stringBuscar
   }); 
@@ -36,11 +39,13 @@ const {stringBuscar} = useContext(SearchContext);
     CategoriaReporteESG: null,
     NacionalidadLegajo: null,
     GrupoLegajo: null,
+    PersonaContactoLegajo: null,
     Mail1Legajo: null,
     PersonaContactoAsamblea: null,
     Mail2Legajo: null,
     Mail3Legajo: null,
     TelefonoLegajo: null,
+    DomicilioLegajo: null,
     LocalidadLegajo: null,
     ProvinciaLegajo: null,
     PaisLegajo: null
@@ -98,7 +103,7 @@ const {stringBuscar} = useContext(SearchContext);
             <form onSubmit={ handleSubmit } className='d-flex'>
               <input 
                 type="text"
-                placeholder="ingrese código a buscar"
+                placeholder="ingrese CUIT a buscar"
                 className="form-control"
                 name="searchText"
                 autoComplete="off"
