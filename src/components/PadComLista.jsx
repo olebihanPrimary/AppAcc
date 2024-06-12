@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Message } from "./Messaje";
 import { PadComNavBar } from "./PadComNavBar";
 import { useFetch } from "../hooks/useFetch";
@@ -11,6 +11,10 @@ import { SearchContext } from "../context/SearchContext";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../hooks/useForm";
 import {FileUpload} from "./FileUpLoad";
+import { HotTable, HotColumn, HotTableClass } from "@handsontable/react";
+import { registerAllModules } from "handsontable/registry";
+import { registerLanguageDictionary, esMX } from "handsontable/i18n";
+import "handsontable/dist/handsontable.full.css";
 
 
 export const PadComLista = () => {
@@ -21,6 +25,7 @@ export const PadComLista = () => {
       searchText: p
     }); 
  
+    const hotTableComponent = useRef(null);
 
     const [data, setData] = useState([]);  
 
@@ -31,6 +36,17 @@ export const PadComLista = () => {
     const [endPoint, setEndPoint ] = useState(`https://${url}/api/PadCom`)
 
     const navigate = useNavigate();
+
+
+
+   const afterOnCellMouseDown = (event, coords, td) => {
+    console.log('afteroncellmousedown')
+    handleClick(event, coords, td);
+  };
+
+  const hotSettings = {
+    afterOnCellMouseDown: afterOnCellMouseDown,
+ };
 
     const handleSubmit = async (event) => {
 
@@ -49,7 +65,20 @@ export const PadComLista = () => {
         }
       
       }
+      const handleClick = (event, coords, td) => {
+        console.log('handleclick')
+        console.log(coords.col)
+        if (coords && coords.col === 0 && coords.row >= 0) { // Cambia el índice de la columna según sea necesario
+          //alert(`Clic en la ${coords.col}, fila ${coords.row}`);
+          const valor = hotTableComponent.current.hotInstance.getDataAtCell( coords.row, coords.col);
+          console.log(coords.row)
+          console.log(coords.col)
+          console.log(valor);
+          setStringBuscar( valor );
+          navigate('../searchpagepadcom');
+        }
 
+      };
 
     const ActStringBuscar = (valor) => {
 
@@ -66,8 +95,13 @@ export const PadComLista = () => {
       useEffect(() => {
          fetch(endPoint)
           .then(response => response.json())
-          .then(data => setData(data))
-          .catch(error => console.error(error));
+          .then(data => { 
+            setData(data)
+            console.log(data) 
+          })
+          .catch(error => 
+            console.error(error)
+          );
       }, [endPoint]); 
 
 /*       console.log(data) */
@@ -87,7 +121,7 @@ export const PadComLista = () => {
                 <form onSubmit={ handleSubmit } className='d-flex'>
                   <input 
                     type="text"
-                    placeholder="búsqueda por cuenta"
+                    placeholder="búsqueda por cuenta o CUIT"
                     className="form-control"
                     name="searchText"
                     autoComplete="off"
@@ -107,8 +141,38 @@ export const PadComLista = () => {
 
             <h4 className="mt-3">Padrón Descargas</h4> 
             <hr />
+
+            <HotTable
+              ref={hotTableComponent}
+              settings={hotSettings}
+              language={esMX.languageCode}
+              data={data}
+              licenseKey="non-commercial-and-evaluation"
+              colHeaders={true}
+              rowHeaders={true}
+              columnSorting={true}
+              mergeCells={true}
+              contextMenu={["row_above", "row_below"]}
+              readOnly={false}
+              colWidths={[100,100,100,200,200,150, 160]}
+              >
+              <HotColumn  className="cuit" data="cuit" title="CUIT"  />
+            
+              <HotColumn  data="comitente" title="Comitente"
+               />
+              <HotColumn  data="depositante" title="Depositante"
+               />
+              <HotColumn  data="nombrE_CUENTA" title="Nombre"
+               />             
+               <HotColumn data="denominacion" title="Denom."/>  
+
+               <HotColumn className={'htRight'} data="tenencia" title="Tenencia"/>
+
+               <HotColumn className={'htRight'} data="fecha" title="Fecha Descarga"/>
+
+              </HotTable>            
  
-            <table className="Container ms-3">
+            {/* <table className="Container ms-3">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -134,7 +198,7 @@ export const PadComLista = () => {
                     ))}
                 </tbody>
 
-            </table>
+            </table> */}
            
 
              

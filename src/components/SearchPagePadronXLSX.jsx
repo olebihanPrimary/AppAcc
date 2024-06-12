@@ -53,6 +53,7 @@ window.scrollTo(0, 0);
 
   const [data, setData] = useState(formInicial);
   const [mostrar,setMostrar] = useState(data);
+  
 
   const showSearch = (mostrar != null );
   const showError  = (mostrar === null);
@@ -133,13 +134,15 @@ window.scrollTo(0, 0);
             
             <div className="alert alert-success animate__animated animate__fadeIn" 
                 style={{ display: showSearch ? '' : 'none' }}>
-              Padrón XLSX Consultado.
+              Padrón Permanente Consultado.
             </div>
 
             <div className="alert alert-danger animate__animated animate__fadeIn" 
                 style={{ display: showError ? '' : 'none' }}>
-              No existe <b> Padrón XLSX consultado </b>
+              No existe <b> Padrón Permanente consultado </b>
             </div>
+
+         
 
 
            {/*   <h4>Comitente consultado</h4> */}
@@ -175,7 +178,7 @@ window.scrollTo(0, 0);
   )
 }
 const Container =styled.div`
-   height:180vh;
+   height:200vh;
    margin:20px;
    .container-lista{
     font-size: 14px;

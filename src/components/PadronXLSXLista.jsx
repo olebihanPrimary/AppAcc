@@ -178,17 +178,17 @@ export const  PadronXLSXLista =  () => {
               mergeCells={true}
               contextMenu={["row_above", "row_below"]}
               readOnly={false}
-              colWidths={[100,100,300,100,70, 50,100,100,100]}
+              colWidths={[100,100,300,100,70, 70,100,100,100]}
               
             >
-            <HotColumn  className="cuitLegajo" data="cuitLegajo" title="CUIT"
+            <HotColumn className="cuitLegajo" data="cuitLegajo" title="CUIT"
                />
               <HotColumn data="categoriaLegajo" title="Categoria" />
               <HotColumn data="nombreLegajo" title="Nombre"/>
               <HotColumn data="tipoPersonaLegajo" title="Tipo"/>
               <HotColumn className={'htRight'} data="tenencia" title="Tenencia" />
               <HotColumn className={'htCenter'} data="estado" title="Estado" />
-              <HotColumn data="localidadLegajo" title="Localidad" />
+              <HotColumn className={'htCenter'} data="localidadLegajo" title="Localidad" />
               <HotColumn data="provinciaLegajo" title="Provincia" />
               <HotColumn data="paisLegajo" title="Pais" />
               </HotTable>

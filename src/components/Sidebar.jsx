@@ -90,7 +90,7 @@ const linksArray = [
     icon: <MdConstruction />,
     to: "/mantenimientotablaspage",
   },
-  {
+/*   {
     label: "Comitentes",
     icon: <MdAccessibility />,
     to: "/comitenteslista",
@@ -99,17 +99,17 @@ const linksArray = [
     label: "Accionistas",
     icon: <AiOutlineApartment />,
     to: "/accionistaslista",
-  },
+  }, */
   {
     label: "Padrón Permanente",
     icon: <MdAutoAwesomeMotion />,
     to: "/PadronXLSXLista",
   },
-  {
+  /* {
     label: "Movimientos",
     icon: <MdChecklist />,
     to: "/home",
-  },
+  }, */
   {
     label: "Descargas Padrón",
     icon: <MdAutoAwesomeMotion />,
@@ -117,11 +117,11 @@ const linksArray = [
   },
 
 
-  {
+/*   {
     label: "Reportes",
     icon: <MdOutlineAnalytics />,
     to: "/reportes",
-  },
+  }, */
 ];
 const secondarylinksArray = [
 

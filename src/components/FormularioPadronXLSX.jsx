@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { useState } from 'react';
 import { VarContext } from '../App';
 
-export const FormularioPadronXLSX = ({respuesta}) => {
+export const FormularioPadronXLSX  = ({respuesta}) => {
 /*     console.log('previo al undefine')
     console.log(JSON.stringify(respuesta))
 
@@ -23,8 +23,11 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             mail2Legajo,mail3Legajo,telefonoLegajo, domicilioLegajo, localidadLegajo,provinciaLegajo,
             paisLegajo, tenencia} = formState;
 
-            console.log(respuesta);
+            /* console.log(respuesta); */
             
+
+            const [ resultado , setResultado ] = useState({});
+
             useEffect(() => {
             
                 setFormState(respuesta);
@@ -46,9 +49,9 @@ export const FormularioPadronXLSX = ({respuesta}) => {
              
             
             const varUrl = useContext(VarContext);
-            console.log(varUrl);      
+            /* console.log(varUrl);  */     
             
-            const handleSubmit = ( event ) => {
+            const handleSubmit = async ( event ) => {
 
                 event.preventDefault();
         
@@ -59,13 +62,14 @@ export const FormularioPadronXLSX = ({respuesta}) => {
         
                  }
                  else {
+
                     console.log("Actualizando intentando")
                    /*  'https://localhost:32768/api/Comitentes/update' */
                    console.log(JSON.stringify(formState));
 
                    console.log(varUrl)
 
-                    const resultado = fetch(`https://${varUrl}/api/PadronXLSX/update`, 
+                    const resultado = await fetch(`https://${varUrl}/api/PadronXLSX/update`, 
                     {
                     method: 'PUT',
                     headers: {
@@ -73,11 +77,17 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(formState)
-                    });
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        setResultado(data)
+                        console.log(data)
+                    })
+                    .catch(error => console.error('Error:', error));;
                     
-                    const data =  response.json();
+                    //setResultado( response.json() );
 
-                    console.log(data);
+                    /* console.log(response); */
                     console.log('Subido');
         
                  }
@@ -136,6 +146,23 @@ export const FormularioPadronXLSX = ({respuesta}) => {
 
             </div>
 
+            <div className="row ">
+
+                <label className="col-sm-2 col-form-label col-form-label-sm">ALYC:</label>
+
+                 <div className="col-sm-8">
+                 <input 
+                        type="text" 
+                        className="form-control form-control-sm mt-2"
+                        placeholder="ALYC"
+                        name="alycLegajo"
+                        value={ alycLegajo }
+                        onChange={ onInputChange }
+                    
+                    />
+                </div>
+                    
+            </div>
             
             <div className="row align-items-center"> 
                 <label className="col-sm-2 col-form-label col-form-label-sm">Tipo Persona:</label>
@@ -179,6 +206,17 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                         onChange={ onInputChange }
                     />
                 </div>
+                <label className="col-sm-2 col-form-label col-form-label-sm">Cat.Reporte ESG:</label>
+                <div className="col-sm-3">
+                    <input 
+                        type="text" 
+                        className="form-control form-control-sm mt-2"
+                        placeholder="Cat.Reporte ESG"
+                        name="categoriaReporteESG"
+                        value={ categoriaReporteESG  }
+                        onChange={ onInputChange }
+                    />
+                </div>
             </div>        
             <div className="row align-items-center"> 
                 <label className="col-sm-2 col-form-label col-form-label-sm">Tenencia:</label>
@@ -198,7 +236,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
 
             <div className="row align-items-center">
                 <label className="col-sm-2 col-form-label col-form-label-sm">Nombre Cuenta:</label>
-                <div className="col-sm-7">
+                <div className="col-sm-8">
                     <input 
                         type="text" 
                         className="form-control form-control-sm mt-2"
@@ -210,6 +248,20 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                     />
                 </div>
             </div>
+            <div className="row align-items-center">
+                <label className="col-sm-2 col-form-label col-form-label-sm">Persona Contacto:</label>
+                <div className="col-sm-8">
+                    <input 
+                        type="text" 
+                        className="form-control form-control-sm mt-2"
+                        placeholder="Persona Contacto"
+                        name="personaContactoLegajo"
+                        value={ personaContactoLegajo }
+                        onChange={ onInputChange }
+                    />
+                </div>
+            </div> 
+
             <div className="row align-items-center">
                 <label className="col-sm-2 col-form-label col-form-label-sm">Contacto Asamblea:</label>
                 <div className="col-sm-8">
@@ -239,7 +291,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                     </select>  */}                   
 
                     <input 
-                        type="text" 
+                        type="email" 
                         className="form-control form-control-sm mt-2"
                         placeholder="Mail 1"
                         name="mail1Legajo"
@@ -254,7 +306,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
                 <label className="col-sm-2 col-form-label col-form-label-sm">Mail 2:</label>
                 <div className="col-sm-8">                          
                     <input 
-                        type="text" 
+                        type="email" 
                         className="form-control form-control-sm mt-2"
                         placeholder="Mail 2"
                         name="mail2Legajo"
@@ -270,7 +322,7 @@ export const FormularioPadronXLSX = ({respuesta}) => {
             <label className="col-sm-2 col-form-label col-form-label-sm">Mail 3:</label>
             <div className="col-sm-8">                          
                 <input 
-                    type="text" 
+                    type="email" 
                     className="form-control form-control-sm mt-2"
                     placeholder="Mail 3"
                     name="mail3Legajo"
