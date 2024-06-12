@@ -37,6 +37,8 @@ export const PadComLista = () => {
 
     const navigate = useNavigate();
 
+    const [resultado, setResultado] = useState('');
+
 
 
    const afterOnCellMouseDown = (event, coords, td) => {
@@ -54,7 +56,7 @@ export const PadComLista = () => {
   
       console.log();
 
-        if ( searchText == null ){
+        if ( searchText == null || searchText === ''){
           
           setEndPoint(`https://${url}/api/PadCom/nombre/0`)
 
@@ -93,11 +95,13 @@ export const PadComLista = () => {
    
 
       useEffect(() => {
+        setResultado('Cargando Padrón...'); 
          fetch(endPoint)
           .then(response => response.json())
           .then(data => { 
-            setData(data)
-            console.log(data) 
+            setData(data);
+            setResultado('');
+            console.log(data);
           })
           .catch(error => 
             console.error(error)
@@ -140,6 +144,7 @@ export const PadComLista = () => {
             <FileUpload />
 
             <h4 className="mt-3">Padrón Descargas</h4> 
+            <p className="text-success ms-2">{ resultado }</p>
             <hr />
 
             <HotTable
