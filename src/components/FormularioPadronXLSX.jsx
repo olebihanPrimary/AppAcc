@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from 'react'
 import { useState } from 'react';
 import { VarContext } from '../App';
+import 'sweetalert2/dist/sweetalert2.css';
+import Swal from 'sweetalert2';
 
 export const FormularioPadronXLSX  = ({respuesta}) => {
 /*     console.log('previo al undefine')
@@ -26,7 +28,36 @@ export const FormularioPadronXLSX  = ({respuesta}) => {
             /* console.log(respuesta); */
             
 
-            const [ resultado , setResultado ] = useState({});
+            const [ resultado , setResultado ] = useState();
+
+            useEffect(() => {
+                if (resultado != null)
+                    {
+                console.log(resultado.codigo);
+                if (resultado.codigo != '200') {
+
+                    Swal.fire({
+                        title: 'Error',
+                        text: resultado.error,
+                        icon: 'error',
+                        confirmButtonText: 'Error'
+                      });
+
+                } else {
+
+                    Swal.fire({
+                        title: '',
+                        text: 'Registro actualizado con éxito.',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                      });
+
+                };
+
+
+                  
+                  ;};
+            },[resultado]);
 
             useEffect(() => {
             
