@@ -36,12 +36,14 @@ export const FormularioPadronXLSX  = ({respuesta}) => {
                 console.log(resultado.codigo);
                 if (resultado.codigo != '200') {
 
+                    
                     Swal.fire({
                         title: 'Error',
                         text: resultado.error,
                         icon: 'error',
                         confirmButtonText: 'Error'
                       });
+
 
                 } else {
 
