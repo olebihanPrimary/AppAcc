@@ -5,17 +5,6 @@ import 'sweetalert2/dist/sweetalert2.css';
 import Swal from 'sweetalert2';
 
 export const FormularioPadronXLSX  = ({respuesta}) => {
-/*     console.log('previo al undefine')
-    console.log(JSON.stringify(respuesta))
-
-    const {  numeroAccionista, numeroDepositanteCVSA,alycLegajo,cuitLegajo,
-        nombreLegajo,tipoPersonaLegajo,categoriaLegajo,categoriaReporteESG,
-        nacionalidadLegajo,grupoLegajo,mail1Legajo,personaContactoAsamblea,
-        mail2Legajo,mail3Legajo,telefonoLegajo,localidadLegajo,provinciaLegajo,
-        paisLegajos} = JSON.stringify(respuesta); 
-        /* const {respuesta} = respuesta; */
-
-        //console.log("REspuesta "+respuesta.numeroAccionista); 
 
         const [formState, setFormState] = useState({respuesta});
 

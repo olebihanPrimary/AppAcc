@@ -17,6 +17,9 @@ import { SearchPagePadCom } from "../components/SearchPagePadCom";
 import { PadronXLSXLista } from "../components/PadronXLSXLista";
 import { PadronXLSXForm } from "../components/PadronXLSXForm";
 import { SearchPagePadronXLSX } from "../components/SearchPagePadronXLSX";
+import { CuentasLista } from "../components/CuentasLista";
+import { SearchPageCuentas } from "../components/SearchPageCuentas";
+import { CuentasForm } from "../components/CuentasForm";
 
 export function MyRoutes() {
 
@@ -39,11 +42,14 @@ export function MyRoutes() {
         <Route path="/searchpageaccionistas" element={<SearchPageAccionistas />} />
         <Route path="/comitenteslista" element={<ComitentesLista />} />
         <Route path="/comitentesform" element={<ComitentesForm />} />
+        <Route path="/cuentaslista" element={<CuentasLista />} />
+        <Route path="/cuentasform" element={<CuentasForm />} />
         <Route path="/searchpagepadcom" element={<SearchPagePadCom />} />
         <Route path="/padcomlista" element={<PadComLista />} />
         <Route path="/padronXLSXlista" element={<PadronXLSXLista />} />
         <Route path="/padronXLSXForm" element={<PadronXLSXForm />} />
-        <Route path="/searchpagepadronXLSX" element={<SearchPagePadronXLSX />} />        
+        <Route path="/searchpagepadronXLSX" element={<SearchPagePadronXLSX />} />    
+        <Route path="/searchpagecuentas" element={<SearchPageCuentas />} />     
         <Route path="/padcomform" element={<PadComForm />} />        
         <Route path="/searchpage" element={<SearchPage />} />    
         <Route path="/home" element= {<Home />} /> 

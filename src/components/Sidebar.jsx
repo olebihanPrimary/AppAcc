@@ -94,12 +94,12 @@ const linksArray = [
     label: "Comitentes",
     icon: <MdAccessibility />,
     to: "/comitenteslista",
-  },
+  },*/
   {
-    label: "Accionistas",
+    label: "Cuentas",
     icon: <AiOutlineApartment />,
-    to: "/accionistaslista",
-  }, */
+    to: "/cuentaslista",
+  }, 
   {
     label: "Padrón Permanente",
     icon: <MdAutoAwesomeMotion />,
